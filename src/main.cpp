@@ -24,51 +24,51 @@ using namespace std;
 // Get a fortune and return it as std::string.
 string get_fortune ()
 {
-	FILE *fortune_pipe;
-	
-	string fortune_string;
-	char buffer[100];
-	
-	fortune_pipe = popen ("fortune -s", "r");
-	
-	// Check for NULL pipe
-	if (fortune_pipe == NULL)
-	{
-		cout<<"Failed to run 'fortune'"<<endl;
-	}
+    FILE *fortune_pipe;
+    
+    string fortune_string;
+    char buffer[100];
+    
+    fortune_pipe = popen ("fortune -s", "r");
+    
+    // Check for NULL pipe
+    if (fortune_pipe == NULL)
+    {
+        cout<<"Failed to run 'fortune'"<<endl;
+    }
 
-	// Get data
-	while (fgets (buffer, sizeof buffer, fortune_pipe) != NULL)
-	{
-		fortune_string.append(buffer);
-	}
+    // Get data
+    while (fgets (buffer, sizeof buffer, fortune_pipe) != NULL)
+    {
+        fortune_string.append(buffer);
+    }
 
-	// Close fortune_pipe
-	pclose (fortune_pipe);
-	
-	// Return
-	return fortune_string;
+    // Close fortune_pipe
+    pclose (fortune_pipe);
+    
+    // Return
+    return fortune_string;
 }
 
 void send_notify (string message)
 {
-	NotifyNotification *notification;
-	
-	// Create notification and set properties
-	notification = notify_notification_new ("Todays Fortune",
-			message.c_str (), NULL);
-	notify_notification_set_urgency (notification, NOTIFY_URGENCY_LOW);
-	notify_notification_set_timeout (notification, 10000);
-	
-	// Show it
-	GError *error = NULL;
-	notify_notification_show(notification, &error);
+    NotifyNotification *notification;
+    
+    // Create notification and set properties
+    notification = notify_notification_new ("Todays Fortune",
+            message.c_str (), NULL);
+    notify_notification_set_urgency (notification, NOTIFY_URGENCY_LOW);
+    notify_notification_set_timeout (notification, 10000);
+    
+    // Show it
+    GError *error = NULL;
+    notify_notification_show(notification, &error);
 }
 
 int main (int argc, char *argv[])
 {
-	string fortune;
-	
+    string fortune;
+    
     // Initialize notification library
     notify_init("fortuner");
     
