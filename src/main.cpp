@@ -46,6 +46,11 @@ string get_fortune ()
     // Close fortune_pipe
     pclose (fortune_pipe);
     
+    // Strip possible trailing newline
+    if (fortune_string[fortune_string.length()-1] == '\n') {
+        fortune_string.erase(fortune_string.length()-1);
+    }
+
     // Return
     return fortune_string;
 }
