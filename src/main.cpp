@@ -19,6 +19,7 @@
 #include <iostream>
 #include <libnotify/notify.h>
 
+#include "config.h"
 #include "settings.h"
 
 using namespace std;
@@ -80,7 +81,7 @@ int main (int argc, char *argv[])
     load_settings (settings);
     
     // Initialize notification library
-    notify_init("fortuner");
+    notify_init (PROJECT_NAME);
     
     // Get a fortune and send it
     fortune = get_fortune ();

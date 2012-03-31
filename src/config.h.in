@@ -1,0 +1,9 @@
+// Filled in by the cmake build system
+
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#define PROJECT_NAME "@PROJECT_NAME@"
+#define VERSION_STRING "@VERSION_STRING@"
+
+#endif /* CONFIG_H */

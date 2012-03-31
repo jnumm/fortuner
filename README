@@ -16,6 +16,7 @@ INSTALLATION
 
 3) Build the program
    $ cd fortuner
+   $ cmake .
    $ make
 
 3) Now you can run Fortuner:
