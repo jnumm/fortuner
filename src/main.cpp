@@ -19,6 +19,8 @@
 #include <iostream>
 #include <libnotify/notify.h>
 
+#include "settings.h"
+
 using namespace std;
 
 // Get a fortune and return it as std::string.
@@ -55,7 +57,7 @@ string get_fortune ()
     return fortune_string;
 }
 
-void send_notify (string message)
+void send_notify (string message, int timeout)
 {
     NotifyNotification *notification;
     
@@ -63,7 +65,7 @@ void send_notify (string message)
     notification = notify_notification_new ("Todays Fortune",
             message.c_str (), NULL);
     notify_notification_set_urgency (notification, NOTIFY_URGENCY_LOW);
-    notify_notification_set_timeout (notification, 10000);
+    notify_notification_set_timeout (notification, timeout * 1000);
     
     // Show it
     GError *error = NULL;
@@ -72,14 +74,17 @@ void send_notify (string message)
 
 int main (int argc, char *argv[])
 {
+    Settings settings;
     string fortune;
+    
+    load_settings (settings);
     
     // Initialize notification library
     notify_init("fortuner");
     
     // Get a fortune and send it
     fortune = get_fortune ();
-    send_notify (fortune);
+    send_notify (fortune, settings.timeout);
     
     return 0;
 }
