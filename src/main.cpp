@@ -17,6 +17,7 @@
  */
 
 #include <iostream>
+#include <cstring>
 #include <libnotify/notify.h>
 
 #include "config.h"
@@ -76,9 +77,28 @@ void send_notify (string message, int timeout)
 int main (int argc, char *argv[])
 {
     Settings settings;
+    string settings_file;
     string fortune;
     
-    load_settings (settings);
+    // Parse arguments
+    if (argc >= 1)
+    {
+    for (int i=1; i<argc; i++)
+        {
+            if (strcmp (argv[i], "--config") == 0 ||
+					strcmp (argv[i], "-c") == 0)
+            {
+                settings_file = argv[i+1];
+                i++;
+            }
+            else
+            {
+                cout<<"Invalid option '"<<argv[i]<<"'."<<endl;
+            }
+        }
+    }
+    
+    load_settings (settings, settings_file);
     
     // Initialize notification library
     notify_init (PROJECT_NAME);

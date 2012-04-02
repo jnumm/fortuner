@@ -26,6 +26,6 @@ struct Settings
     int timeout;
 };
 
-void load_settings(Settings& settings);
+void load_settings(Settings& settings, string filename);
 
 #endif /* SETTINGS_H */

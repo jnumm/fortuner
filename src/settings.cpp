@@ -28,9 +28,9 @@ struct Settings
     int timeout;
 };
 
-void load_settings (Settings& settings)
+void load_settings (Settings& settings, string filename)
 {
-    ifstream fin ("fortuner.conf");
+    ifstream fin (filename.c_str ());
     if (fin.is_open ())
     {
         string line;
