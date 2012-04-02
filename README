@@ -1,9 +1,7 @@
 ABOUT
--------------
+------
 Fortuner shows a fortune as a notification. Requires the fortune
 program, libnotify and GTK+ 2.
-
-Fortuner is licenced under GNU GPL v3.
 
 INSTALLATION
 -------------
@@ -23,5 +21,11 @@ INSTALLATION
    $ ./fortuner
 
 BUGS
--------------
+-----
 Please report bugs to https://github.com/jnumm/fortuner/issues.
+
+
+LICENCE
+--------
+Fortuner is licenced under GNU GPL v3 (see COPYING), except for file
+cmake/modules/FindGLIB2.cmake, which is licenced under the BSD licence.
