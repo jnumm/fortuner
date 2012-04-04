@@ -27,5 +27,8 @@ Please report bugs to https://github.com/jnumm/fortuner/issues.
 
 LICENCE
 --------
-Fortuner is licenced under GNU GPL v3 (see COPYING), except for file
-cmake/modules/FindGLIB2.cmake, which is licenced under the BSD licence.
+Fortuner is licenced mainly under GNU GPL v3 (see COPYING).
+
+Exceptions:
+* cmake/modules/FindGLIB2.cmake: BSD licence
+* all icons: CC BY 3.0
