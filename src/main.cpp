@@ -21,7 +21,9 @@
 #include <libnotify/notify.h>
 
 #include "config.h"
+#include "main.h"
 #include "settings.h"
+#include "status_icon.h"
 
 using namespace std;
 
@@ -80,6 +82,9 @@ int main (int argc, char *argv[])
     string settings_file;
     string fortune;
     
+    // Initialize GTK+ library
+    gtk_init (&argc, &argv);
+
     // Parse arguments
     if (argc >= 1)
     {
@@ -98,6 +103,9 @@ int main (int argc, char *argv[])
         }
     }
     
+    // The status icon
+    display_status_icon ();
+
     load_settings (settings, settings_file);
     
     // Initialize notification library
@@ -107,5 +115,8 @@ int main (int argc, char *argv[])
     fortune = get_fortune ();
     send_notify (fortune, settings.timeout);
     
+    // GTK+ main loop (for status icon)
+    gtk_main ();
+
     return 0;
 }
