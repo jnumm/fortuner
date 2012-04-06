@@ -25,3 +25,5 @@ target_link_libraries (
   ${GTK2_LIBRARIES}
   ${LIBNOTIFY_LIBRARIES}
 )
+
+install (TARGETS ${PROJECT_NAME} DESTINATION bin)
