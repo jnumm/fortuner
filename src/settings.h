@@ -19,13 +19,11 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-using namespace std;
-
 struct Settings
 {
     int timeout;
 };
 
-void load_settings(Settings& settings, string filename);
+void load_settings(Settings& settings, std::string filename);
 
 #endif /* SETTINGS_H */

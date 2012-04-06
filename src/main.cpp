@@ -25,14 +25,12 @@
 #include "settings.h"
 #include "status_icon.h"
 
-using namespace std;
-
 // Get a fortune and return it as std::string.
-string get_fortune ()
+std::string get_fortune ()
 {
     FILE *fortune_pipe;
     
-    string fortune_string;
+    std::string fortune_string;
     char buffer[100];
     
     fortune_pipe = popen ("fortune -s", "r");
@@ -40,7 +38,7 @@ string get_fortune ()
     // Check for NULL pipe
     if (fortune_pipe == NULL)
     {
-        cout<<"Failed to run 'fortune'"<<endl;
+        std::cout<<"Failed to run 'fortune'"<<std::endl;
     }
 
     // Get data
@@ -61,7 +59,7 @@ string get_fortune ()
     return fortune_string;
 }
 
-void send_notify (string message, int timeout)
+void send_notify (std::string message, int timeout)
 {
     NotifyNotification *notification;
     
@@ -79,8 +77,8 @@ void send_notify (string message, int timeout)
 int main (int argc, char *argv[])
 {
     Settings settings;
-    string settings_file;
-    string fortune;
+    std::string settings_file;
+    std::string fortune;
     
     // Initialize GTK+ library
     gtk_init (&argc, &argv);
@@ -98,7 +96,7 @@ int main (int argc, char *argv[])
             }
             else
             {
-                cout<<"Invalid option '"<<argv[i]<<"'."<<endl;
+                std::cout<<"Invalid option '"<<argv[i]<<"'."<<std::endl;
             }
         }
     }

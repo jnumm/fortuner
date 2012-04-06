@@ -21,8 +21,6 @@
 
 #include <iostream>
 
-using namespace std;
-
-void send_notify (string message, int timeout);
+void send_notify (std::string message, int timeout);
 
 #endif /* MAIN_H */

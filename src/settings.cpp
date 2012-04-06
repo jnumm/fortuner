@@ -21,22 +21,20 @@
 #include <sstream>
 #include <string>
 
-using namespace std;
-
 struct Settings
 {
     int timeout;
 };
 
-void load_settings (Settings& settings, string filename)
+void load_settings (Settings& settings, std::string filename)
 {
-    ifstream fin (filename.c_str ());
+    std::ifstream fin (filename.c_str ());
     if (fin.is_open ())
     {
-        string line;
+        std::string line;
         while (getline (fin, line))
         {
-            istringstream sin (line.substr (line.find("=") + 1));
+            std::istringstream sin (line.substr (line.find("=") + 1));
             if (line.find ("timeout") != -1)
             {
                 sin >> settings.timeout;
@@ -45,7 +43,7 @@ void load_settings (Settings& settings, string filename)
     }
     else
     {
-        cout<<"Not able to open configuration file."<<endl;
+        std::cout<<"Not able to open configuration file."<<std::endl;
         
         settings.timeout = 10;
     }
