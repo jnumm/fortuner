@@ -12,5 +12,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 install (FILES README DESTINATION share/doc/${PROJECT_NAME})
 file (GLOB icons "icons/*")
 install (DIRECTORY ${icons} DESTINATION share/icons/hicolor)
+install (FILES misc/fortuner.desktop DESTINATION share/applications)
 
 add_subdirectory (src)

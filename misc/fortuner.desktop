@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Fortuner
+Comment=Shows fortunes
+Exec=fortuner
+Icon=fortuner
+Type=Application
+Categories=Game;Amusement;GTK;
+Terminal=false
+StartupNotify=false
