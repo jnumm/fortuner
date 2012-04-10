@@ -85,6 +85,15 @@ void send_fortune ()
     send_notify (fortune, settings.getTimeout ());
 }
 
+void print_help ()
+{
+    std::cout<<
+            "Usage: fortuner [OPTION...]\n"
+            "\n"
+            "  -c, --config FILE          use a specific configuration file\n"
+            "  -h, --help                 show this help message\n";
+}
+
 int main (int argc, char *argv[])
 {
     std::string settings_file;
@@ -97,7 +106,13 @@ int main (int argc, char *argv[])
     {
     for (int i=1; i<argc; i++)
         {
-            if (strcmp (argv[i], "--config") == 0 ||
+            if (strcmp (argv[i], "--help") == 0 ||
+					strcmp (argv[i], "-h") == 0)
+            {
+                print_help ();
+                return 0;
+            }
+            else if (strcmp (argv[i], "--config") == 0 ||
 					strcmp (argv[i], "-c") == 0)
             {
                 settings_file = argv[i+1];
@@ -106,6 +121,7 @@ int main (int argc, char *argv[])
             else
             {
                 std::cout<<"Invalid option '"<<argv[i]<<"'."<<std::endl;
+                return 1;
             }
         }
     }
