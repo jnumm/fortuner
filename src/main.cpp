@@ -41,7 +41,7 @@ std::string get_fortune ()
     // Check for NULL pipe
     if (fortune_pipe == NULL)
     {
-        std::cout<<"Failed to run 'fortune'"<<std::endl;
+        std::cout<<"Failed to run 'fortune'\n";
     }
 
     // Get data
@@ -120,7 +120,7 @@ int main (int argc, char *argv[])
             }
             else
             {
-                std::cout<<"Invalid option '"<<argv[i]<<"'."<<std::endl;
+                std::cout<<"Invalid option '"<<argv[i]<<"'.\n";
                 return 1;
             }
         }

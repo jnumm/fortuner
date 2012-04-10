@@ -46,7 +46,7 @@ class Settings
             else
             {
                 std::cout<<"Not able to open configuration file. "
-                        <<"Using defaults."<<std::endl;
+                        "Using defaults.\n";
 
                 timeout = 10;
             }
