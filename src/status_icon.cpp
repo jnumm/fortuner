@@ -20,6 +20,7 @@
 
 #include "main.h"
 #include "status_icon.h"
+#include "settings.h"
 
 static GtkWidget *menu = NULL;
 static GtkStatusIcon *status_icon = NULL;
@@ -31,7 +32,7 @@ static void destroy (GtkWidget *widget, gpointer data)
 
 static void activate (GtkStatusIcon* status_icon, gpointer user_data)
 {
-    send_notify ("Fortuner icon clicked!", 10);
+    send_notify ("Fortuner icon clicked!", settings.getTimeout ());
 }
 
 static void popup_menu (GtkStatusIcon *status_icon, guint button,

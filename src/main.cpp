@@ -25,6 +25,9 @@
 #include "settings.h"
 #include "status_icon.h"
 
+// Static variable makes it possible to use this anywhere in the program
+Settings settings;
+
 // Get a fortune and return it as std::string.
 std::string get_fortune ()
 {
@@ -76,7 +79,6 @@ void send_notify (std::string message, int timeout)
 
 int main (int argc, char *argv[])
 {
-    Settings settings;
     std::string settings_file;
     std::string fortune;
     
@@ -104,14 +106,14 @@ int main (int argc, char *argv[])
     // The status icon
     display_status_icon ();
 
-    load_settings (settings, settings_file);
+    settings.load_settings (settings_file);
     
     // Initialize notification library
     notify_init (PROJECT_NAME);
     
     // Get a fortune and send it
     fortune = get_fortune ();
-    send_notify (fortune, settings.timeout);
+    send_notify (fortune, settings.getTimeout ());
     
     // GTK+ main loop (for status icon)
     gtk_main ();

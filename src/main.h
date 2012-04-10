@@ -21,6 +21,9 @@
 
 #include <iostream>
 
+class Settings;
+extern Settings settings;
+
 void send_notify (std::string message, int timeout);
 
 #endif /* MAIN_H */

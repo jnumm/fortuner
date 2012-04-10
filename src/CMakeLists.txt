@@ -4,7 +4,6 @@ project (fortuner)
 
 set (fortuner_SRCS
   main.cpp
-  settings.cpp
   status_icon.cpp
 )
 

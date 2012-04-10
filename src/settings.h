@@ -19,11 +19,43 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-struct Settings
-{
-    int timeout;
-};
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 
-void load_settings(Settings& settings, std::string filename);
+class Settings
+{
+    public:
+        void load_settings (std::string filename)
+        {
+            std::ifstream fin (filename.c_str ());
+            if (fin.is_open ())
+            {
+                std::string line;
+                while (getline (fin, line))
+                {
+                    std::istringstream sin (line.substr (
+                            line.find ("=") + 1));
+                    if (line.find ("timeout") != -1)
+                    {
+                        sin >> timeout;
+                    }
+                }
+            }
+            else
+            {
+                std::cout<<"Not able to open configuration file. "
+                        <<"Using defaults."<<std::endl;
+
+                timeout = 10;
+            }
+        }
+
+        int getTimeout () const { return timeout; }
+
+    private:
+        int timeout;
+};
 
 #endif /* SETTINGS_H */
