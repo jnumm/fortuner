@@ -32,7 +32,7 @@ static void destroy (GtkWidget *widget, gpointer data)
 
 static void activate (GtkStatusIcon* status_icon, gpointer user_data)
 {
-    send_notify ("Fortuner icon clicked!", settings.getTimeout ());
+    send_fortune ();
 }
 
 static void popup_menu (GtkStatusIcon *status_icon, guint button,

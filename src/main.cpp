@@ -77,10 +77,17 @@ void send_notify (std::string message, int timeout)
     notify_notification_show(notification, &error);
 }
 
+// Get and send a fortune
+void send_fortune ()
+{
+    std::string fortune;
+    fortune = get_fortune ();
+    send_notify (fortune, settings.getTimeout ());
+}
+
 int main (int argc, char *argv[])
 {
     std::string settings_file;
-    std::string fortune;
     
     // Initialize GTK+ library
     gtk_init (&argc, &argv);
@@ -110,10 +117,6 @@ int main (int argc, char *argv[])
     
     // Initialize notification library
     notify_init (PROJECT_NAME);
-    
-    // Get a fortune and send it
-    fortune = get_fortune ();
-    send_notify (fortune, settings.getTimeout ());
     
     // GTK+ main loop (for status icon)
     gtk_main ();
