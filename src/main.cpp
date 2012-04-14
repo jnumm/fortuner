@@ -112,6 +112,12 @@ int main (int argc, char *argv[])
                 print_help ();
                 return 0;
             }
+            else if (strcmp (argv[i], "--version") == 0 ||
+					strcmp (argv[i], "-v") == 0)
+            {
+                std::cout<<PROJECT_NAME<<" "<<VERSION_STRING<<"\n";
+                return 0;
+            }
             else if (strcmp (argv[i], "--config") == 0 ||
 					strcmp (argv[i], "-c") == 0)
             {
