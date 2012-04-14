@@ -94,13 +94,13 @@ static void popup_menu (GtkStatusIcon *status_icon, guint button,
         GtkWidget *item;
         menu = gtk_menu_new ();
         
-        item = gtk_menu_item_new_with_label ("About");
+        item = gtk_image_menu_item_new_from_stock (GTK_STOCK_ABOUT, NULL);
         gtk_menu_append (menu, item);
         g_signal_connect (G_OBJECT (item), "activate",
                 G_CALLBACK (show_about_dialog),
                 NULL);
 
-        item = gtk_menu_item_new_with_label ("Quit");
+        item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
         gtk_menu_append (menu, item);
         g_signal_connect (G_OBJECT (item), "activate",
                 G_CALLBACK (destroy), 
