@@ -67,7 +67,7 @@ void send_notify (std::string message, int timeout)
     NotifyNotification *notification;
     
     // Create notification and set properties
-    notification = notify_notification_new ("Todays Fortune",
+    notification = notify_notification_new (settings.getTitle().c_str(),
             message.c_str (), NULL);
     notify_notification_set_urgency (notification, NOTIFY_URGENCY_LOW);
     notify_notification_set_timeout (notification, timeout * 1000);

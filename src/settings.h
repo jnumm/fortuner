@@ -41,6 +41,10 @@ class Settings
                     {
                         sin >> timeout;
                     }
+                    else if (line.find ("title") != -1)
+                    {
+                        sin >> title;
+                    }
                 }
             }
             else
@@ -49,13 +53,16 @@ class Settings
                         "Using defaults.\n";
 
                 timeout = 10;
+                title = "Today's fortune";
             }
         }
 
         int getTimeout () const { return timeout; }
+        std::string getTitle () const { return title; }
 
     private:
         int timeout;
+        std::string title;
 };
 
 #endif /* SETTINGS_H */
