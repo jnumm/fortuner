@@ -91,7 +91,8 @@ void print_help ()
             "Usage: fortuner [OPTION...]\n"
             "\n"
             "  -c, --config FILE          use a specific configuration file\n"
-            "  -h, --help                 show this help message\n";
+            "  -h, --help                 show this help message\n"
+            "  -v, --version              print program version\n";
 }
 
 int main (int argc, char *argv[])
