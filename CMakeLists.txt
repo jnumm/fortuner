@@ -13,5 +13,6 @@ install (FILES README DESTINATION share/doc/${PROJECT_NAME})
 file (GLOB icons "icons/*")
 install (DIRECTORY ${icons} DESTINATION share/icons/hicolor)
 install (FILES misc/fortuner.desktop DESTINATION share/applications)
+install (FILES doc/fortuner.6 DESTINATION share/man/man6)
 
 add_subdirectory (src)
