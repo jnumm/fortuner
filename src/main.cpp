@@ -17,6 +17,7 @@
  */
 
 #include <iostream>
+#include <cstdlib>
 #include <cstring>
 #include <libnotify/notify.h>
 
@@ -99,7 +100,8 @@ void print_help ()
 int main (int argc, char *argv[])
 {
     bool no_icon_mode = false;
-    std::string settings_file;
+    std::string settings_file = std::string (getenv ("HOME")) +
+            "/.config/fortuner/fortuner.conf";
 
     // Parse arguments
     if (argc >= 1)
