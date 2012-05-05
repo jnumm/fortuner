@@ -1,0 +1,30 @@
+.TH FORTUNER "1" "May 2012" "fortuner" "User Commands"
+.SH NAME
+fortuner \- show a fortune as a notification
+.SH SYNOPSIS
+.B fortuner
+[\fIOPTION\fR...]
+.SH DESCRIPTION
+Fortuner places an icon in the system tray, where clicking a
+notification containing a fortune is displayed. Alternatively, it is
+possible to not to show the icon at all but just the notification.
+.TP
+The fortunes are acquired from the \fBfortune\fR program.
+.SH OPTIONS
+Following command line options are recognised:
+.TP
+\fB\-n\fR, \fB\-\-no\-icon\fR
+don't display status icon, just a fortune
+.TP
+\fB\-c\fR, \fB\-\-config\fR \fIFILE\fR
+use a specific configuration file
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+show help message and exit
+.TP
+\fB\-v\fR, \fB\-\-version\fR
+print program version and exit
+.SH BUGS
+Please report bugs to https://github.com/jnumm/fortuner/issues.
+.SH AUTHOR
+Fortuner is written by Juhani Numminen <juhaninumminen0@gmail.com>.
