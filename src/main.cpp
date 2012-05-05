@@ -90,6 +90,7 @@ void print_help ()
     std::cout<<
             "Usage: fortuner [OPTION...]\n"
             "\n"
+            "  -n, --no-icon              don't display status icon\n"
             "  -c, --config FILE          use a specific configuration file\n"
             "  -h, --help                 show this help message\n"
             "  -v, --version              print program version\n";
@@ -97,10 +98,8 @@ void print_help ()
 
 int main (int argc, char *argv[])
 {
+    bool no_icon_mode = false;
     std::string settings_file;
-    
-    // Initialize GTK+ library
-    gtk_init (&argc, &argv);
 
     // Parse arguments
     if (argc >= 1)
@@ -125,6 +124,11 @@ int main (int argc, char *argv[])
                 settings_file = argv[i+1];
                 i++;
             }
+            else if (strcmp (argv[i], "--no-icon") == 0 ||
+                    strcmp (argv[i], "-n") == 0)
+            {
+                no_icon_mode = true;
+            }
             else
             {
                 std::cout<<"Invalid option '"<<argv[i]<<"'.\n";
@@ -133,16 +137,28 @@ int main (int argc, char *argv[])
         }
     }
     
-    // The status icon
-    display_status_icon ();
+    if (!no_icon_mode) {
+        // Initialize GTK+ library
+        gtk_init (&argc, &argv);
+
+        // The status icon
+        display_status_icon ();
+    }
 
     settings.load_settings (settings_file);
     
     // Initialize notification library
     notify_init (PROJECT_NAME);
     
-    // GTK+ main loop (for status icon)
-    gtk_main ();
+    if (!no_icon_mode)
+    {
+        // GTK+ main loop (for status icon)
+        gtk_main ();
+    }
+    else
+    {
+        send_fortune ();
+    }
 
     return 0;
 }
