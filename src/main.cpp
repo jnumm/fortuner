@@ -22,9 +22,9 @@
 #include <libnotify/notify.h>
 
 #include "config.h"
+#include "gtk_ui.h"
 #include "main.h"
 #include "settings.h"
-#include "status_icon.h"
 
 // Static variable makes it possible to use this anywhere in the program
 Settings settings;

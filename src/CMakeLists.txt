@@ -4,7 +4,7 @@ project (fortuner)
 
 set (fortuner_SRCS
   main.cpp
-  status_icon.cpp
+  gtk_ui.cpp
 )
 
 configure_file (

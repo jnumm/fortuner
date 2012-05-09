@@ -19,8 +19,8 @@
 #include <gtk/gtk.h>
 
 #include "config.h"
+#include "gtk_ui.h"
 #include "main.h"
-#include "status_icon.h"
 #include "settings.h"
 
 static GtkWidget *menu = NULL;
