@@ -132,3 +132,16 @@ void display_status_icon ()
     g_signal_connect (G_OBJECT (status_icon), "activate",
               G_CALLBACK (activate), NULL);
 }
+
+void display_error_dialog (const char* message)
+{
+    GtkWidget *dialog = gtk_message_dialog_new (NULL,
+	        GTK_DIALOG_MODAL,
+            GTK_MESSAGE_ERROR,
+            GTK_BUTTONS_OK,
+            message);
+    gtk_window_set_title (GTK_WINDOW (dialog), "Error");
+    gtk_window_set_icon_name (GTK_WINDOW (dialog), "fortuner");
+    gtk_dialog_run (GTK_DIALOG (dialog));
+    gtk_widget_destroy (dialog);
+}
