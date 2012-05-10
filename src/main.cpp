@@ -36,6 +36,7 @@ std::string get_fortune ()
     
     std::string fortune_string;
     char buffer[100];
+    int exit_status;
     
     fortune_pipe = popen ("fortune -s", "r");
     
@@ -52,7 +53,13 @@ std::string get_fortune ()
     }
 
     // Close fortune_pipe
-    pclose (fortune_pipe);
+    exit_status = pclose (fortune_pipe);
+
+    // Check exit status
+    if (exit_status != 0)
+    {
+        throw (1);
+    }
     
     // Strip possible trailing newline
     if (fortune_string[fortune_string.length()-1] == '\n') {
@@ -82,8 +89,19 @@ void send_notify (std::string message, int timeout)
 void send_fortune ()
 {
     std::string fortune;
-    fortune = get_fortune ();
-    send_notify (fortune, settings.getTimeout ());
+
+    try
+    {
+        fortune = get_fortune ();
+    }
+    catch (int e)
+    {
+        display_error_dialog ("Could not get output of 'fortune'.\n"
+		        "Please verify you have it installed in your system.");
+		return;
+	}
+
+	send_notify (fortune, settings.getTimeout ());
 }
 
 void print_help ()
