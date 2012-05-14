@@ -135,7 +135,8 @@ int main (int argc, char *argv[])
             else if (strcmp (argv[i], "--version") == 0 ||
 					strcmp (argv[i], "-v") == 0)
             {
-                std::cout<<PROJECT_NAME<<" "<<VERSION_STRING<<"\n";
+                std::cout<<PROJECT_NAME<<" "<<VERSION_STRING<<
+                        " (built on "<<__DATE__<<")\n";
                 return 0;
             }
             else if (strcmp (argv[i], "--config") == 0 ||
