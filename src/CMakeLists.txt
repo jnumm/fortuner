@@ -3,8 +3,9 @@ cmake_minimum_required (VERSION 2.8)
 project (fortuner)
 
 set (fortuner_SRCS
-  main.cpp
   gtk_ui.cpp
+  main.cpp
+  settings.cpp
 )
 
 configure_file (
