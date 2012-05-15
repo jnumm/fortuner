@@ -24,10 +24,12 @@ class Settings
     public:
         void load_settings (std::string filename);
 
+        bool getOffensive () const { return offensive; }
         int getTimeout () const { return timeout; }
         std::string getTitle () const { return title; }
 
     private:
+        bool offensive;
         int timeout;
         std::string title;
 };

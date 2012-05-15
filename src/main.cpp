@@ -34,11 +34,20 @@ std::string get_fortune ()
 {
     FILE *fortune_pipe;
     
+    std::string fortune_cmdline = "fortune -s";
     std::string fortune_string;
     char buffer[100];
     int exit_status;
     
-    fortune_pipe = popen ("fortune -s", "r");
+    if (settings.getOffensive () == true)
+    {
+        /* From the fortune(6) man page:
+         * -a  Choose  from all lists of maxims, both offensive and not.
+         */
+        fortune_cmdline += " -a";
+    }
+
+    fortune_pipe = popen (fortune_cmdline.c_str (), "r");
     
     // Check for NULL pipe
     if (fortune_pipe == NULL)

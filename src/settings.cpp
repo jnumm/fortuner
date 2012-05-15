@@ -33,7 +33,11 @@ void Settings::load_settings (std::string filename)
         {
             std::istringstream sin (line.substr (
                     line.find ("=") + 1));
-            if (line.find ("timeout") != -1)
+            if (line.find ("offensive") != -1)
+            {
+                sin >> offensive;
+            }
+            else if (line.find ("timeout") != -1)
             {
                 sin >> timeout;
             }
@@ -48,6 +52,7 @@ void Settings::load_settings (std::string filename)
         std::cout<<"Not able to open configuration file. "
                 "Using defaults.\n";
 
+        offensive = false;
         timeout = 10;
         title = "Today's fortune";
     }
