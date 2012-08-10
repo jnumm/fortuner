@@ -7,7 +7,7 @@ INSTALLATION
 -------------
 1) Install the requirements
    An example for Debian GNU/Linux:
-   # apt-get install fortune-mod libnotify-dev
+   # apt-get install libgtk2.0-dev cmake fortune-mod libnotify-dev
 
 2) Clone the repository (get sources)
    $ git clone git://github.com/jnumm/fortuner.git
