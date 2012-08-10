@@ -26,4 +26,6 @@ target_link_libraries (
   ${LIBNOTIFY_LIBRARIES}
 )
 
+set(EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/bin")
+
 install (TARGETS ${PROJECT_NAME} DESTINATION bin)

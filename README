@@ -18,6 +18,7 @@ INSTALLATION
    $ make
 
 3) Now you can run Fortuner:
+   $ cd bin
    $ ./fortuner
 
 BUGS
