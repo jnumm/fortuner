@@ -19,6 +19,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
+#include <vector>
 #include <libnotify/notify.h>
 
 #include "config.h"
@@ -28,6 +29,9 @@
 
 // Static variable makes it possible to use this anywhere in the program
 Settings settings;
+
+// A vector to hold the notifications.
+std::vector<NotifyNotification> notifications;
 
 // Get a fortune and return it as std::string.
 std::string get_fortune ()
@@ -91,7 +95,21 @@ void send_notify (std::string message, int timeout)
     
     // Show it
     GError *error = NULL;
-    notify_notification_show(notification, &error);
+    notify_notification_show (notification, &error);
+    
+    // Add to the vector.
+    notifications.push_back (*notification);
+}
+
+void close_notifications ()
+{
+    while (notifications.size () != 0)
+    {
+        GError *error = NULL;
+        notify_notification_close (&notifications.back (), &error);
+        notifications.pop_back ();
+        std::cout << "Closed :: " << notifications.size () << "  ";
+    }
 }
 
 // Get and send a fortune
@@ -184,6 +202,12 @@ int main (int argc, char *argv[])
     {
         // GTK+ main loop (for status icon)
         gtk_main ();
+        
+        // Close notifications if settings say so.
+        if (settings.getCloseNotificationsOnQuit ())
+        {
+            close_notifications ();
+        }
     }
     else
     {

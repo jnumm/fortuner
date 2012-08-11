@@ -24,11 +24,14 @@ class Settings
     public:
         void load_settings (std::string filename);
 
+        bool getCloseNotificationsOnQuit () const { return
+                closeNotificationsOnQuit; }
         bool getOffensive () const { return offensive; }
         int getTimeout () const { return timeout; }
         std::string getTitle () const { return title; }
 
     private:
+        bool closeNotificationsOnQuit;
         bool offensive;
         int timeout;
         std::string title;

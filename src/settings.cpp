@@ -33,7 +33,11 @@ void Settings::load_settings (std::string filename)
         {
             std::istringstream sin (line.substr (
                     line.find ("=") + 1));
-            if (line.find ("offensive") != -1)
+            if (line.find ("closeNotificationsOnQuit") != -1)
+            {
+                sin >> closeNotificationsOnQuit;
+            }
+            else if (line.find ("offensive") != -1)
             {
                 sin >> offensive;
             }
@@ -52,6 +56,7 @@ void Settings::load_settings (std::string filename)
         std::cout<<"Not able to open configuration file. "
                 "Using defaults.\n";
 
+        closeNotificationsOnQuit = true;
         offensive = false;
         timeout = 10;
         title = "Today's fortune";
