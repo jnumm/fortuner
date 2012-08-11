@@ -25,5 +25,6 @@ class Settings;
 extern Settings settings;
 
 void send_fortune ();
+void close_notifications ();
 
 #endif /* MAIN_H */

@@ -108,7 +108,6 @@ void close_notifications ()
         GError *error = NULL;
         notify_notification_close (&notifications.back (), &error);
         notifications.pop_back ();
-        std::cout << "Closed :: " << notifications.size () << "  ";
     }
 }
 
