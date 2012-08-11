@@ -94,6 +94,13 @@ static void popup_menu (GtkStatusIcon *status_icon, guint button,
         GtkWidget *item;
         menu = gtk_menu_new ();
         
+        item = gtk_image_menu_item_new_from_stock (GTK_STOCK_CLOSE, NULL);
+        gtk_menu_item_set_label (GTK_MENU_ITEM (item), "Close Fortunes");
+        gtk_menu_append (menu, item);
+        g_signal_connect (G_OBJECT (item), "activate",
+                G_CALLBACK (close_notifications),
+                NULL);
+        
         item = gtk_image_menu_item_new_from_stock (GTK_STOCK_ABOUT, NULL);
         gtk_menu_append (menu, item);
         g_signal_connect (G_OBJECT (item), "activate",
