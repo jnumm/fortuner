@@ -30,5 +30,5 @@ LICENSE
 Fortuner is licensed mainly under GNU GPL v3 (see COPYING).
 
 Exceptions:
-* cmake/modules/FindGLIB2.cmake: BSD license
+* cmake/modules/FindGLIB2.cmake: 3-clause BSD license
 * all icons: CC BY 3.0
