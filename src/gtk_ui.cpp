@@ -143,9 +143,10 @@ void display_status_icon ()
 void display_error_dialog (const char* message)
 {
     GtkWidget *dialog = gtk_message_dialog_new (NULL,
-	        GTK_DIALOG_MODAL,
+            GTK_DIALOG_MODAL,
             GTK_MESSAGE_ERROR,
             GTK_BUTTONS_OK,
+            "%s",
             message);
     gtk_window_set_title (GTK_WINDOW (dialog), "Error");
     gtk_window_set_icon_name (GTK_WINDOW (dialog), "fortuner");
