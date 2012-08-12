@@ -10,7 +10,7 @@ set (fortuner_SRCS
 
 configure_file (
   "${PROJECT_SOURCE_DIR}/config.h.in"
-  "${PROJECT_BINARY_DIR}/config.h"
+  "${PROJECT_SOURCE_DIR}/config.h"
 )
 
 find_package (GTK2)
