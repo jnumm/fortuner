@@ -10,13 +10,17 @@ set (fortuner_SRCS
 
 configure_file (
   "${PROJECT_SOURCE_DIR}/config.h.in"
-  "${PROJECT_SOURCE_DIR}/config.h"
+  "${PROJECT_BINARY_DIR}/config.h"
 )
 
 find_package (GTK2)
 find_package (Libnotify)
 
-include_directories (${GTK2_INCLUDE_DIRS} ${LIBNOTIFY_INCLUDE_DIRS})
+include_directories (
+  ${PROJECT_BINARY_DIR}
+  ${GTK2_INCLUDE_DIRS}
+  ${LIBNOTIFY_INCLUDE_DIRS}
+)
 link_directories (${GTK2_LIBRARY_DIRS} ${LIBNOTIFY_LIBRARY_DIRS})
 add_executable (${PROJECT_NAME} ${fortuner_SRCS})
 add_definitions (${GTK2_CFLAGS_OTHER} ${LIBNOTIFY_CFLAGS_OTHER})
