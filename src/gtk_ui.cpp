@@ -63,7 +63,7 @@ static void show_about_dialog (GtkMenuItem *menu_item,
         GtkWidget* about_dialog = gtk_about_dialog_new ();
 
         gtk_window_set_icon_name ((GtkWindow*)about_dialog, "fortuner");
-        gtk_about_dialog_set_name ((GtkAboutDialog*)about_dialog,
+        gtk_about_dialog_set_program_name ((GtkAboutDialog*)about_dialog,
         "Fortuner");
         gtk_about_dialog_set_version ((GtkAboutDialog*)about_dialog,
                 VERSION_STRING);
@@ -96,19 +96,19 @@ static void popup_menu (GtkStatusIcon *status_icon, guint button,
         
         item = gtk_image_menu_item_new_from_stock (GTK_STOCK_CLOSE, NULL);
         gtk_menu_item_set_label (GTK_MENU_ITEM (item), "Close Fortunes");
-        gtk_menu_append (menu, item);
+        gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
         g_signal_connect (G_OBJECT (item), "activate",
                 G_CALLBACK (close_notifications),
                 NULL);
         
         item = gtk_image_menu_item_new_from_stock (GTK_STOCK_ABOUT, NULL);
-        gtk_menu_append (menu, item);
+        gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
         g_signal_connect (G_OBJECT (item), "activate",
                 G_CALLBACK (show_about_dialog),
                 NULL);
 
         item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
-        gtk_menu_append (menu, item);
+        gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
         g_signal_connect (G_OBJECT (item), "activate",
                 G_CALLBACK (destroy), 
                 NULL);
@@ -130,7 +130,7 @@ void display_status_icon ()
     status_icon = gtk_status_icon_new_from_icon_name ("fortuner");
     gtk_status_icon_set_visible (status_icon, TRUE); 
 
-    gtk_status_icon_set_tooltip (status_icon, "Fortuner");
+    gtk_status_icon_set_tooltip_text (status_icon, "Fortuner");
 
     // Connect signals
     g_signal_connect (G_OBJECT (status_icon), "popup-menu",
