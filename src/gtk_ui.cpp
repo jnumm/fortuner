@@ -31,7 +31,7 @@ static void destroy (GtkWidget *widget, gpointer data)
     gtk_main_quit ();
 }
 
-static void activate (GtkStatusIcon* status_icon, gpointer user_data)
+static void activate (GtkStatusIcon *status_icon, gpointer user_data)
 {
     send_fortune ();
 }
@@ -43,9 +43,9 @@ static void show_about_dialog (GtkMenuItem *menu_item,
     // This helps prevent multiple instances
     if (!gtk_grab_get_current ())
     {
-        const gchar* authors[] =
+        const gchar *authors[] =
         { "Juhani Numminen <juhaninumminen0@gmail.com>", NULL };
-        const gchar* license =
+        const gchar *license =
             "This program is free software; you can redistribute it and/or modify\n"
             "it under the terms of the GNU General Public License as published by\n"
             "the Free Software Foundation; either version 3 of the License, or\n"
@@ -60,28 +60,28 @@ static void show_about_dialog (GtkMenuItem *menu_item,
             "along with this program.  If not, see <http://www.gnu.org/licenses/>.";
 
         /* Create the about dialog */
-        GtkWidget* about_dialog = gtk_about_dialog_new ();
+        GtkWidget *about_dialog = gtk_about_dialog_new ();
 
-        gtk_window_set_icon_name ((GtkWindow*)about_dialog, "fortuner");
-        gtk_about_dialog_set_program_name ((GtkAboutDialog*)about_dialog,
+        gtk_window_set_icon_name (GTK_WINDOW (about_dialog), "fortuner");
+        gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG (about_dialog),
         "Fortuner");
-        gtk_about_dialog_set_version ((GtkAboutDialog*)about_dialog,
+        gtk_about_dialog_set_version (GTK_ABOUT_DIALOG (about_dialog),
                 VERSION_STRING);
-        gtk_about_dialog_set_comments ((GtkAboutDialog*)about_dialog,
+        gtk_about_dialog_set_comments (GTK_ABOUT_DIALOG (about_dialog),
                 "Show a fortune as a notification.");
 
-        gtk_about_dialog_set_copyright ((GtkAboutDialog*)about_dialog,
+        gtk_about_dialog_set_copyright (GTK_ABOUT_DIALOG (about_dialog),
                 "Copyright (C) 2012 Juhani Numminen");
-        gtk_about_dialog_set_authors ((GtkAboutDialog*)about_dialog,
+        gtk_about_dialog_set_authors (GTK_ABOUT_DIALOG (about_dialog),
                 authors);
 
-        gtk_about_dialog_set_license ((GtkAboutDialog*)about_dialog,
+        gtk_about_dialog_set_license (GTK_ABOUT_DIALOG (about_dialog),
                 license);
-        gtk_about_dialog_set_logo_icon_name (
-                (GtkAboutDialog*)about_dialog, "fortuner");
+        gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG (about_dialog),
+                "fortuner");
 
         // Run the about dialog
-        gtk_dialog_run ((GtkDialog*)about_dialog);
+        gtk_dialog_run (GTK_DIALOG (about_dialog));
         gtk_widget_destroy (about_dialog);
     }
 }
@@ -140,7 +140,7 @@ void display_status_icon ()
               G_CALLBACK (activate), NULL);
 }
 
-void display_error_dialog (const char* message)
+void display_error_dialog (const char *message)
 {
     GtkWidget *dialog = gtk_message_dialog_new (NULL,
             GTK_DIALOG_MODAL,

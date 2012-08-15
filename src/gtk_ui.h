@@ -22,6 +22,6 @@
 #include <gtk/gtk.h>
 
 void display_status_icon ();
-void display_error_dialog (const char* message);
+void display_error_dialog (const char *message);
 
 #endif /* STATUS_ICON_H */
