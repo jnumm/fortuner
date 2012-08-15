@@ -16,4 +16,10 @@ install (DIRECTORY ${icons} DESTINATION share/icons/hicolor)
 install (FILES misc/fortuner.desktop DESTINATION share/applications)
 install (FILES doc/fortuner.6 DESTINATION share/man/man6)
 
+option (
+  USE_GAMES_DIR
+  "Use games/ directory instead of bin/ for binary installation directory."
+  OFF
+)
+
 add_subdirectory (src)

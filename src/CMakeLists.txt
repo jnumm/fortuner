@@ -32,4 +32,8 @@ target_link_libraries (
 
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/bin")
 
-install (TARGETS ${PROJECT_NAME} DESTINATION bin)
+if (USE_GAMES_DIR)
+  install (TARGETS ${PROJECT_NAME} DESTINATION games)
+else()
+  install (TARGETS ${PROJECT_NAME} DESTINATION bin)
+endif()
