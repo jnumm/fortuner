@@ -13,20 +13,32 @@ configure_file (
   "${PROJECT_BINARY_DIR}/config.h"
 )
 
-find_package (GTK2)
+if (USE_GTK2)
+  find_package (GTK2)
+  set (SELECTED_GTK_INCLUDE_DIRS ${GTK2_INCLUDE_DIRS})
+  set (SELECTED_GTK_LIBRARY_DIRS ${GTK2_LIBRARY_DIRS})
+  set (SELECTED_GTK_CFLAGS_OTHER ${GTK2_CFLAGS_OTHER})
+elseif (USE_GTK3)
+  find_package (PkgConfig REQUIRED)
+  pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+  set (SELECTED_GTK_INCLUDE_DIRS ${GTK3_INCLUDE_DIRS})
+  set (SELECTED_GTK_LIBRARY_DIRS ${GTK3_LIBRARY_DIRS})
+  set (SELECTED_GTK_CFLAGS_OTHER ${GTK3_CFLAGS_OTHER})
+endif ()
+
 find_package (Libnotify)
 
 include_directories (
   ${PROJECT_BINARY_DIR}
-  ${GTK2_INCLUDE_DIRS}
+  ${SELECTED_GTK_INCLUDE_DIRS}
   ${LIBNOTIFY_INCLUDE_DIRS}
 )
-link_directories (${GTK2_LIBRARY_DIRS} ${LIBNOTIFY_LIBRARY_DIRS})
+link_directories (${SELECTED_GTK_LIBRARY_DIRS} ${LIBNOTIFY_LIBRARY_DIRS})
 add_executable (${PROJECT_NAME} ${fortuner_SRCS})
-add_definitions (${GTK2_CFLAGS_OTHER} ${LIBNOTIFY_CFLAGS_OTHER})
+add_definitions (${SELECTED_GTK_CFLAGS_OTHER} ${LIBNOTIFY_CFLAGS_OTHER})
 target_link_libraries (
   ${PROJECT_NAME}
-  ${GTK2_LIBRARIES}
+  ${SELECTED_GTK_LIBRARIES}
   ${LIBNOTIFY_LIBRARIES}
 )
 

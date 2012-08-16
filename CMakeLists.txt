@@ -22,4 +22,25 @@ option (
   OFF
 )
 
+option (
+  USE_GTK2
+  "Use GTK+ 2 libraries and headers."
+  OFF
+)
+
+option (
+  USE_GTK3
+  "Use GTK+ 3 libraries and headers."
+  ON
+)
+
+# Ensure that at least one of them is selected.
+if (USE_GTK2)
+  set (USE_GTK3 OFF)
+endif()
+
+if ((USE_GTK2 AND USE_GTK3) OR (NOT USE_GTK2 AND NOT USE_GTK3))
+  message (FATAL_ERROR "Please select either GTK+ 2 or GTK+ 3.")
+endif()
+
 add_subdirectory (src)
