@@ -37,6 +37,9 @@ option (
 # Ensure that at least one of them is selected.
 if (USE_GTK2)
   set (USE_GTK3 OFF)
+  message (STATUS "Using GTK+ 2.")
+elseif(USE_GTK3)
+  message (STATUS "Using GTK+ 3.")
 endif()
 
 if ((USE_GTK2 AND USE_GTK3) OR (NOT USE_GTK2 AND NOT USE_GTK3))
