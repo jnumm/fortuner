@@ -23,6 +23,8 @@
 
 #include "settings.h"
 
+/* Load settings from a config file.
+ * This implementation looks a bit clumsy, it'll be fixed some day. */
 void Settings::load_settings (std::string filename)
 {
     std::ifstream fin (filename.c_str ());

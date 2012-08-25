@@ -27,7 +27,7 @@
 #include "main.h"
 #include "settings.h"
 
-// Static variable makes it possible to use this anywhere in the program
+// Global variable makes it possible to use this anywhere in the program.
 Settings settings;
 
 // A vector to hold the notifications.
@@ -53,16 +53,16 @@ std::string get_fortune ()
 
     fortune_pipe = popen (fortune_cmdline.c_str (), "r");
     
-    // Check for NULL pipe
+    // Check for NULL pipe.
     if (fortune_pipe == NULL)
     {
         std::cout<<"Failed to run 'fortune'\n";
     }
 
-    // Get data
+    // Get data from the pipe and append it to the buffer.
     while (fgets (buffer, sizeof buffer, fortune_pipe) != NULL)
     {
-        fortune_string.append(buffer);
+        fortune_string.append (buffer);
     }
 
     // Close fortune_pipe
@@ -75,8 +75,8 @@ std::string get_fortune ()
     }
     
     // Strip possible trailing newline
-    if (fortune_string[fortune_string.length()-1] == '\n') {
-        fortune_string.erase(fortune_string.length()-1);
+    if (fortune_string [fortune_string.length () - 1] == '\n') {
+        fortune_string.erase (fortune_string.length () - 1);
     }
 
     // Return
@@ -88,12 +88,12 @@ void send_notify (std::string message, int timeout)
     NotifyNotification *notification;
     
     // Create notification and set properties
-    notification = notify_notification_new (settings.getTitle().c_str(),
+    notification = notify_notification_new (settings.getTitle ().c_str (),
             message.c_str (), NULL);
     notify_notification_set_urgency (notification, NOTIFY_URGENCY_LOW);
     notify_notification_set_timeout (notification, timeout * 1000);
     
-    // Show it
+    // Show the notification.
     GError *error = NULL;
     notify_notification_show (notification, &error);
     
@@ -101,6 +101,7 @@ void send_notify (std::string message, int timeout)
     notifications.push_back (*notification);
 }
 
+// Close all notifications of the vector.
 void close_notifications ()
 {
     while (notifications.size () != 0)
@@ -111,7 +112,7 @@ void close_notifications ()
     }
 }
 
-// Get and send a fortune
+// Get and send a fortune.
 void send_fortune ()
 {
     std::string fortune;
@@ -150,16 +151,16 @@ int main (int argc, char *argv[])
     // Parse arguments
     if (argc >= 1)
     {
-    for (int i=1; i<argc; i++)
+    for (int i = 1; i < argc; i++)
         {
-            if (strcmp (argv[i], "--help") == 0 ||
-					strcmp (argv[i], "-h") == 0)
+            if (strcmp (argv [i], "--help") == 0 ||
+					strcmp (argv [i], "-h") == 0)
             {
                 print_help ();
                 return 0;
             }
-            else if (strcmp (argv[i], "--version") == 0 ||
-					strcmp (argv[i], "-v") == 0)
+            else if (strcmp (argv [i], "--version") == 0 ||
+					strcmp (argv [i], "-v") == 0)
             {
                 std::cout<<PROJECT_NAME<<" "<<VERSION_STRING<<
                         " (built on "<<__DATE__<<")\n";
@@ -178,7 +179,7 @@ int main (int argc, char *argv[])
             }
             else
             {
-                std::cout<<"Invalid option '"<<argv[i]<<"'.\n";
+                std::cout<<"Invalid option '"<<argv [i]<<"'.\n";
                 return 1;
             }
         }
@@ -199,7 +200,7 @@ int main (int argc, char *argv[])
     
     if (!no_icon_mode)
     {
-        // GTK+ main loop (for status icon)
+        // GTK+ main loop (for the status icon)
         gtk_main ();
         
         // Close notifications if settings say so.
@@ -210,6 +211,7 @@ int main (int argc, char *argv[])
     }
     else
     {
+		// No icon mode = just send one fortune notifycation.
         send_fortune ();
     }
 

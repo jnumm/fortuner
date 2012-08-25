@@ -140,6 +140,7 @@ void display_status_icon ()
               G_CALLBACK (activate), NULL);
 }
 
+// Display an error dialog with some text in it.
 void display_error_dialog (const char *message)
 {
     GtkWidget *dialog = gtk_message_dialog_new (NULL,
