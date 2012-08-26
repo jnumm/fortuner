@@ -64,3 +64,17 @@ void Settings::load_settings (std::string filename)
         title = "Today's fortune";
     }
 }
+
+// The getters.
+bool Settings::getCloseNotificationsOnQuit () const { return
+        closeNotificationsOnQuit; }
+bool Settings::getOffensive () const { return offensive; }
+int Settings::getTimeout () const { return timeout; }
+std::string Settings::getTitle () const { return title; }
+
+// The setters.
+void Settings::setCloseNotificationsOnQuit (bool value) {
+        closeNotificationsOnQuit = value; }
+void Settings::setOffensive (bool value) { offensive = value; }
+void Settings::setTimeout (int value) { timeout = value; }
+void Settings::setTitle (std::string value) { title = value; }
