@@ -136,9 +136,9 @@ void print_help ()
     std::cout<<
             "Usage: fortuner [OPTION...]\n"
             "\n"
-            "  -n, --no-icon              don't display status icon\n"
             "  -c, --config FILE          use a specific configuration file\n"
             "  -h, --help                 show this help message\n"
+            "  -n, --no-icon              don't display status icon\n"
             "  -v, --version              print program version\n";
 }
 
