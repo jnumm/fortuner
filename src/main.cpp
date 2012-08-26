@@ -136,6 +136,7 @@ void print_help ()
     std::cout<<
             "Usage: fortuner [OPTION...]\n"
             "\n"
+            "  -a                         choose from also offensive fortunes\n"
             "  -c, --config FILE          use a specific configuration file\n"
             "  -h, --help                 show this help message\n"
             "  -n, --no-icon              don't display status icon\n"
@@ -145,6 +146,7 @@ void print_help ()
 int main (int argc, char *argv[])
 {
     bool no_icon_mode = false;
+    bool offensive = false;
     std::string settings_file = std::string (getenv ("HOME")) +
             "/.config/fortuner/fortuner.conf";
 
@@ -177,6 +179,10 @@ int main (int argc, char *argv[])
             {
                 no_icon_mode = true;
             }
+            else if (strcmp (argv[i], "-a") == 0)
+            {
+				offensive = true;
+			}
             else
             {
                 std::cout<<"Invalid option '"<<argv [i]<<"'.\n";
@@ -194,6 +200,12 @@ int main (int argc, char *argv[])
     }
 
     settings.load_settings (settings_file);
+    
+    if (offensive)
+    {
+        settings.setOffensive (offensive);
+    }
+    std::cout<<settings.getOffensive ()<<"\n";
     
     // Initialize notification library
     notify_init (PROJECT_NAME);
