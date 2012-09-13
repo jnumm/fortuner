@@ -205,8 +205,7 @@ int main (int argc, char *argv[])
     {
         settings.setOffensive (offensive);
     }
-    std::cout<<settings.getOffensive ()<<"\n";
-    
+
     // Initialize notification library
     notify_init (PROJECT_NAME);
     
