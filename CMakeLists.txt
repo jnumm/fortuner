@@ -16,6 +16,8 @@ install (DIRECTORY ${icons} DESTINATION share/icons/hicolor)
 install (FILES misc/fortuner.desktop DESTINATION share/applications)
 install (FILES doc/fortuner.6 DESTINATION share/man/man6)
 
+set (LOCALEDIR "${CMAKE_INSTALL_PREFIX}/share/locale")
+
 option (
   USE_GAMES_DIR
   "Use games/ directory instead of bin/ for binary installation directory."
@@ -31,6 +33,12 @@ option (
 option (
   USE_GTK3
   "Use GTK+ 3 libraries and headers."
+  ON
+)
+
+option (
+  USE_GETTEXT
+  "Use GNU Gettext for i18n. Disable for no translation."
   ON
 )
 

@@ -21,6 +21,7 @@
 #include <sstream>
 #include <string>
 
+#include "gettext.h"
 #include "settings.h"
 
 /* Load settings from a config file.
@@ -55,13 +56,13 @@ void Settings::load_settings (std::string filename)
     }
     else
     {
-        std::cout<<"Not able to open configuration file. "
-                "Using defaults.\n";
+        std::cout<<_("Not able to open configuration file. "
+                "Using defaults.\n");
 
         closeNotificationsOnQuit = true;
         offensive = false;
         timeout = 10;
-        title = "Today's fortune";
+        title = _("Today's fortune");
     }
 }
 

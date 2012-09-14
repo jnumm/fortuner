@@ -19,6 +19,7 @@
 #include <gtk/gtk.h>
 
 #include "config.h"
+#include "gettext.h"
 #include "gtk_ui.h"
 #include "main.h"
 #include "settings.h"
@@ -64,11 +65,11 @@ static void show_about_dialog (GtkMenuItem *menu_item,
 
         gtk_window_set_icon_name (GTK_WINDOW (about_dialog), "fortuner");
         gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG (about_dialog),
-        "Fortuner");
+                "Fortuner");
         gtk_about_dialog_set_version (GTK_ABOUT_DIALOG (about_dialog),
                 VERSION_STRING);
         gtk_about_dialog_set_comments (GTK_ABOUT_DIALOG (about_dialog),
-                "Show a fortune as a notification.");
+                _("Show a fortune as a notification."));
 
         gtk_about_dialog_set_copyright (GTK_ABOUT_DIALOG (about_dialog),
                 "Copyright (C) 2012 Juhani Numminen");
@@ -95,7 +96,7 @@ static void popup_menu (GtkStatusIcon *status_icon, guint button,
         menu = gtk_menu_new ();
         
         item = gtk_image_menu_item_new_from_stock (GTK_STOCK_CLOSE, NULL);
-        gtk_menu_item_set_label (GTK_MENU_ITEM (item), "Close Fortunes");
+        gtk_menu_item_set_label (GTK_MENU_ITEM (item), _("Close Fortunes"));
         gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
         g_signal_connect (G_OBJECT (item), "activate",
                 G_CALLBACK (close_notifications),
@@ -149,7 +150,7 @@ void display_error_dialog (const char *message)
             GTK_BUTTONS_OK,
             "%s",
             message);
-    gtk_window_set_title (GTK_WINDOW (dialog), "Error");
+    gtk_window_set_title (GTK_WINDOW (dialog), _("Error"));
     gtk_window_set_icon_name (GTK_WINDOW (dialog), "fortuner");
     gtk_dialog_run (GTK_DIALOG (dialog));
     gtk_widget_destroy (dialog);

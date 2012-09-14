@@ -13,6 +13,11 @@ configure_file (
   "${PROJECT_BINARY_DIR}/config.h"
 )
 
+if (USE_GETTEXT)
+  find_package (Gettext)
+  add_definitions (-DENABLE_NLS)
+endif()
+
 if (USE_GTK2)
   find_package (GTK2)
   set (SELECTED_GTK_INCLUDE_DIRS ${GTK2_INCLUDE_DIRS})

@@ -23,6 +23,7 @@
 #include <libnotify/notify.h>
 
 #include "config.h"
+#include "gettext.h"
 #include "gtk_ui.h"
 #include "main.h"
 #include "settings.h"
@@ -56,7 +57,7 @@ std::string get_fortune ()
     // Check for NULL pipe.
     if (fortune_pipe == NULL)
     {
-        std::cout<<"Failed to run 'fortune'\n";
+        std::cout<<_("Failed to run 'fortune'.\n");
     }
 
     // Get data from the pipe and append it to the buffer.
@@ -123,8 +124,8 @@ void send_fortune ()
     }
     catch (int e)
     {
-        display_error_dialog ("Could not get output of 'fortune'.\n"
-		        "Please verify you have it installed in your system.");
+        display_error_dialog (_("Could not get output of 'fortune'.\n"
+		        "Please verify you have it installed in your system."));
 		return;
 	}
 
@@ -133,18 +134,22 @@ void send_fortune ()
 
 void print_help ()
 {
-    std::cout<<
+    std::cout<<_(
             "Usage: fortuner [OPTION...]\n"
             "\n"
             "  -a                         choose from also offensive fortunes\n"
             "  -c, --config FILE          use a specific configuration file\n"
             "  -h, --help                 show this help message\n"
             "  -n, --no-icon              don't display status icon\n"
-            "  -v, --version              print program version\n";
+            "  -v, --version              print program version\n");
 }
 
 int main (int argc, char *argv[])
 {
+    setlocale (LC_ALL, "");
+    bindtextdomain ("fortuner", LOCALEDIR);
+    textdomain ("fortuner");
+    
     bool no_icon_mode = false;
     bool offensive = false;
     std::string settings_file = std::string (getenv ("HOME")) +
@@ -164,8 +169,8 @@ int main (int argc, char *argv[])
             else if (strcmp (argv [i], "--version") == 0 ||
 					strcmp (argv [i], "-v") == 0)
             {
-                std::cout<<PROJECT_NAME<<" "<<VERSION_STRING<<
-                        " (built on "<<__DATE__<<")\n";
+                std::cout<<PROJECT_NAME<<" "<<VERSION_STRING;
+                printf (_("(compiled on %s)\n"), __DATE__);
                 return 0;
             }
             else if (strcmp (argv[i], "--config") == 0 ||
@@ -185,7 +190,7 @@ int main (int argc, char *argv[])
 			}
             else
             {
-                std::cout<<"Invalid option '"<<argv [i]<<"'.\n";
+                printf (_("Invalid option '%s'.\n"), argv [i]);
                 return 1;
             }
         }
