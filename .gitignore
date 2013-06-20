@@ -1,11 +1,4 @@
 fortuner
+src/*.o
 
-CMakeCache.txt
-CMakeFiles/
-cmake_install.cmake
-install_manifest.txt
-Makefile
-src/CMakeFiles/
-src/Makefile
-src/cmake_install.cmake
 src/config.h
