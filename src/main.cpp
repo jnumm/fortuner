@@ -109,7 +109,10 @@ int main (int argc, char *argv[])
     }
 
     // Initialize notification library
-    notify_init (PROJECT_NAME);
+    if (!notify_init (PROJECT_NAME)) {
+        std::cerr << _("Could not initialize the notification library.\n");
+        return 1;
+    }
 
     Fortuner fortuner (settings);
 
@@ -130,6 +133,8 @@ int main (int argc, char *argv[])
         // No icon mode, so let's just send one fortune notification.
         fortuner.send_fortune ();
     }
+
+    notify_uninit ();
 
     return 0;
 }
