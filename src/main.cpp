@@ -1,6 +1,6 @@
 /*
  * fortuner
- * Copyright (C) 2012 Juhani Numminen <juhaninumminen0@gmail.com>
+ * Copyright (C) 2012, 2013 Juhani Numminen <juhaninumminen0@gmail.com>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -100,12 +100,11 @@ int main (int argc, char *argv[])
         }
     }
 
-    Settings settings;
-    settings.load_settings (settings_file);
-    
+    Settings settings (settings_file);
+
     if (offensive)
     {
-        settings.setOffensive (offensive);
+        settings.setOffensive (true);
     }
 
     // Initialize notification library
