@@ -73,7 +73,7 @@ int main (int argc, char *argv[])
             else if (strcmp (argv [i], "--version") == 0 ||
 					strcmp (argv [i], "-v") == 0)
             {
-                std::cout<<PROJECT_NAME<<" "<<VERSION_STRING;
+                std::cout << PROJECT_NAME " " VERSION_STRING " ";
                 printf (_("(compiled on %s)\n"), __DATE__);
                 return 0;
             }
