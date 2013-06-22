@@ -22,17 +22,16 @@
 #include <gtkmm/stock.h>
 
 #include "gettext.h"
-#include "main.h"
 #include "statusicon.h"
 
-FortunerStatusIcon::FortunerStatusIcon ()
+FortunerStatusIcon::FortunerStatusIcon (Fortuner& fortuner)
     : m_pMenuPopup(0)
 {
     m_refStatusIcon = Gtk::StatusIcon::create ("fortuner");
     m_refStatusIcon->set_tooltip_text (_("Fortuner"));
 
-    m_refStatusIcon->signal_activate ().connect (sigc::mem_fun (*this,
-            &FortunerStatusIcon::on_activate));
+    m_refStatusIcon->signal_activate ().connect (sigc::mem_fun (fortuner,
+            &Fortuner::send_fortune));
     m_refStatusIcon->signal_popup_menu ().connect (sigc::mem_fun (*this,
             &FortunerStatusIcon::on_popup_menu));
 
@@ -41,8 +40,8 @@ FortunerStatusIcon::FortunerStatusIcon ()
     m_refActionGroup->add (Gtk::Action::create ("PopupMenu", "Popup Menu"));
 
     m_refActionGroup->add (Gtk::Action::create ("CloseFortunes",
-            _("Close Fortunes")), sigc::mem_fun (*this,
-            &FortunerStatusIcon::on_closefortunes_activate));
+            _("_Close Fortunes")), sigc::mem_fun (fortuner,
+            &Fortuner::close_notifications));
 
     m_refActionGroup->add (Gtk::Action::create ("About", Gtk::Stock::ABOUT),
             sigc::mem_fun (*this, &FortunerStatusIcon::on_about_activate));
@@ -83,21 +82,11 @@ FortunerStatusIcon::~FortunerStatusIcon ()
 {
 }
 
-void FortunerStatusIcon::on_activate ()
-{
-    send_fortune ();
-}
-
 void FortunerStatusIcon::on_popup_menu (guint button, guint32 activate_time)
 {
     if (m_pMenuPopup) {
         m_pMenuPopup->popup (button, activate_time);
     }
-}
-
-void FortunerStatusIcon::on_closefortunes_activate ()
-{
-    close_notifications ();
 }
 
 void FortunerStatusIcon::on_about_activate ()

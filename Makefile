@@ -54,13 +54,16 @@ fortuner: $(OBJS)
 src/%.o: src/%.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
-src/main.o: src/main.cpp src/config.h src/gettext.h src/main.h \
-		src/settings.h src/statusicon.h
+src/main.o: src/main.cpp src/config.h src/fortuner.h src/settings.h \
+		src/gettext.h src/statusicon.h src/aboutdialog.h
 
 src/settings.o: src/settings.cpp src/gettext.h src/settings.h
 
-src/statusicon.o: src/statusicon.cpp src/gettext.h src/gettext.h \
-		src/statusicon.h
+src/fortuner.o: src/fortuner.cpp src/fortuner.h src/settings.h \
+		src/gettext.h
+
+src/statusicon.o: src/statusicon.cpp src/gettext.h src/statusicon.h \
+		src/aboutdialog.h src/fortuner.h src/settings.h
 
 src/aboutdialog.o: src/aboutdialog.cpp src/aboutdialog.h src/config.h \
 		src/gettext.h

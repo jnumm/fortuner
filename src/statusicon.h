@@ -24,17 +24,16 @@
 #include <gtkmm/uimanager.h>
 
 #include "aboutdialog.h"
+#include "fortuner.h"
 
 class FortunerStatusIcon
 {
 public:
-    FortunerStatusIcon ();
+    FortunerStatusIcon (Fortuner& fortuner);
     ~FortunerStatusIcon ();
 
 private:
-    void on_activate ();
     void on_popup_menu (guint button, guint32 activate_time);
-    void on_closefortunes_activate ();
     void on_about_activate ();
     void on_quit_activate ();
 

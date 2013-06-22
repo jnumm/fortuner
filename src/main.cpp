@@ -19,126 +19,21 @@
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
-#include <vector>
 
 #include <gtkmm/main.h>
 #include <gtkmm/messagedialog.h>
 #include <libnotify/notify.h>
 
 #include "config.h"
+#include "fortuner.h"
 #include "gettext.h"
-#include "main.h"
 #include "settings.h"
 #include "statusicon.h"
-
-// Global variable makes it possible to use this anywhere in the program.
-Settings settings;
-
-// A vector to hold the notifications.
-std::vector<NotifyNotification> notifications;
 
 void display_error_dialog (const Glib::ustring& message)
 {
     Gtk::MessageDialog dialog (message, false, Gtk::MESSAGE_ERROR);
     dialog.run ();
-}
-
-// Get a fortune and return it as std::string.
-std::string get_fortune ()
-{
-    FILE *fortune_pipe;
-    
-    std::string fortune_cmdline = "fortune -s";
-    std::string fortune_string;
-    char buffer[100];
-    int exit_status;
-    
-    if (settings.getOffensive () == true)
-    {
-        /* From the fortune(6) man page:
-         * -a  Choose  from all lists of maxims, both offensive and not.
-         */
-        fortune_cmdline += " -a";
-    }
-
-    fortune_pipe = popen (fortune_cmdline.c_str (), "r");
-    
-    // Check for NULL pipe.
-    if (fortune_pipe == NULL)
-    {
-        std::cout<<_("Failed to run 'fortune'.\n");
-    }
-
-    // Get data from the pipe and append it to the buffer.
-    while (fgets (buffer, sizeof buffer, fortune_pipe) != NULL)
-    {
-        fortune_string.append (buffer);
-    }
-
-    // Close fortune_pipe
-    exit_status = pclose (fortune_pipe);
-
-    // Check exit status
-    if (exit_status != 0)
-    {
-        throw (1);
-    }
-    
-    // Strip possible trailing newline
-    if (fortune_string [fortune_string.length () - 1] == '\n') {
-        fortune_string.erase (fortune_string.length () - 1);
-    }
-
-    // Return
-    return fortune_string;
-}
-
-void send_notify (std::string message, int timeout)
-{
-    NotifyNotification *notification;
-    
-    // Create notification and set properties
-    notification = notify_notification_new (settings.getTitle ().c_str (),
-            message.c_str (), NULL);
-    notify_notification_set_urgency (notification, NOTIFY_URGENCY_LOW);
-    notify_notification_set_timeout (notification, timeout * 1000);
-    
-    // Show the notification.
-    GError *error = NULL;
-    notify_notification_show (notification, &error);
-    
-    // Add to the vector.
-    notifications.push_back (*notification);
-}
-
-// Close all notifications of the vector.
-void close_notifications ()
-{
-    while (notifications.size () != 0)
-    {
-        GError *error = NULL;
-        notify_notification_close (&notifications.back (), &error);
-        notifications.pop_back ();
-    }
-}
-
-// Get and send a fortune.
-void send_fortune ()
-{
-    std::string fortune;
-
-    try
-    {
-        fortune = get_fortune ();
-    }
-    catch (int e)
-    {
-        display_error_dialog (_("Could not get output of 'fortune'.\n"
-                "Please verify you have it installed in your system."));
-        return;
-    }
-
-    send_notify (fortune, settings.getTimeout ());
 }
 
 void print_help ()
@@ -205,6 +100,7 @@ int main (int argc, char *argv[])
         }
     }
 
+    Settings settings;
     settings.load_settings (settings_file);
     
     if (offensive)
@@ -214,23 +110,25 @@ int main (int argc, char *argv[])
 
     // Initialize notification library
     notify_init (PROJECT_NAME);
-    
+
+    Fortuner fortuner (settings);
+
     if (!no_icon_mode)
     {
         Gtk::Main kit (argc, argv);
-        FortunerStatusIcon icon;
+        FortunerStatusIcon icon (fortuner);
         Gtk::Main::run ();
 
         // Close notifications if settings say so.
         if (settings.getCloseNotificationsOnQuit ())
         {
-            close_notifications ();
+            fortuner.close_notifications ();
         }
     }
     else
     {
-		// No icon mode = just send one fortune notifycation.
-        send_fortune ();
+        // No icon mode, so let's just send one fortune notification.
+        fortuner.send_fortune ();
     }
 
     return 0;

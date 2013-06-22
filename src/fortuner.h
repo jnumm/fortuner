@@ -1,6 +1,6 @@
 /*
  * fortuner
- * Copyright (C) 2012 Juhani Numminen <juhaninumminen0@gmail.com>
+ * Copyright (C) 2013 Juhani Numminen <juhaninumminen0@gmail.com>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,13 +16,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef FORTUNER_H
+#define FORTUNER_H
 
-class Settings;
-extern Settings settings;
+#include <vector>
 
-void send_fortune ();
-void close_notifications ();
+#include <libnotify/notify.h>
 
-#endif /* MAIN_H */
+#include "settings.h"
+
+class Fortuner
+{
+public:
+    Fortuner (const Settings& settings);
+    ~Fortuner ();
+
+    void send_fortune ();
+    void close_notifications ();
+
+private:
+    std::string get_fortune () const;
+    void send_notify (const std::string& message);
+
+    const Settings& m_settings;
+
+    std::vector<NotifyNotification> m_notifications;
+};
+
+#endif // FORTUNER_H
