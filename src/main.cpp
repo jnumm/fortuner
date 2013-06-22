@@ -20,19 +20,28 @@
 #include <cstdlib>
 #include <cstring>
 #include <vector>
+
+#include <gtkmm/main.h>
+#include <gtkmm/messagedialog.h>
 #include <libnotify/notify.h>
 
 #include "config.h"
 #include "gettext.h"
-#include "gtk_ui.h"
 #include "main.h"
 #include "settings.h"
+#include "statusicon.h"
 
 // Global variable makes it possible to use this anywhere in the program.
 Settings settings;
 
 // A vector to hold the notifications.
 std::vector<NotifyNotification> notifications;
+
+void display_error_dialog (const Glib::ustring& message)
+{
+    Gtk::MessageDialog dialog (message, false, Gtk::MESSAGE_ERROR);
+    dialog.run ();
+}
 
 // Get a fortune and return it as std::string.
 std::string get_fortune ()
@@ -125,11 +134,11 @@ void send_fortune ()
     catch (int e)
     {
         display_error_dialog (_("Could not get output of 'fortune'.\n"
-		        "Please verify you have it installed in your system."));
-		return;
-	}
+                "Please verify you have it installed in your system."));
+        return;
+    }
 
-	send_notify (fortune, settings.getTimeout ());
+    send_notify (fortune, settings.getTimeout ());
 }
 
 void print_help ()
@@ -195,14 +204,6 @@ int main (int argc, char *argv[])
             }
         }
     }
-    
-    if (!no_icon_mode) {
-        // Initialize GTK+ library
-        gtk_init (&argc, &argv);
-
-        // The status icon
-        display_status_icon ();
-    }
 
     settings.load_settings (settings_file);
     
@@ -216,9 +217,10 @@ int main (int argc, char *argv[])
     
     if (!no_icon_mode)
     {
-        // GTK+ main loop (for the status icon)
-        gtk_main ();
-        
+        Gtk::Main kit (argc, argv);
+        FortunerStatusIcon icon;
+        Gtk::Main::run ();
+
         // Close notifications if settings say so.
         if (settings.getCloseNotificationsOnQuit ())
         {

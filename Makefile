@@ -14,15 +14,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# GTK+ version to use. Can be set to either 2.0 or 3.0.
-GTKVER = 2.0
+# GTKMM version to use. Can be set to either 2.4 or 3.0.
+GTKMMVER = 2.4
 
 # Compiler and linker flags.
 CXX = g++
 CXXFLAGS = -g -std=c++11 -pedantic -Wall -Wextra
-CPPFLAGS = $(shell pkg-config --cflags libnotify gtk+-$(GTKVER))
+CPPFLAGS = $(shell pkg-config --cflags libnotify gtkmm-$(GTKMMVER))
 LDFLAGS = -g -Wl,--as-needed
-LDLIBS = $(shell pkg-config --libs libnotify gtk+-$(GTKVER))
+LDLIBS = $(shell pkg-config --libs libnotify gtkmm-$(GTKMMVER))
 
 # Install directories.
 DESTDIR =
@@ -54,13 +54,16 @@ fortuner: $(OBJS)
 src/%.o: src/%.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
-src/main.o: src/main.cpp src/config.h src/gettext.h src/gtk_ui.h \
-		src/main.h src/settings.h
+src/main.o: src/main.cpp src/config.h src/gettext.h src/main.h \
+		src/settings.h src/statusicon.h
 
 src/settings.o: src/settings.cpp src/gettext.h src/settings.h
 
-src/gtk_ui.o: src/gtk_ui.cpp src/config.h src/gettext.h src/gtk_ui.h \
-		src/main.h src/settings.h
+src/statusicon.o: src/statusicon.cpp src/gettext.h src/gettext.h \
+		src/statusicon.h
+
+src/aboutdialog.o: src/aboutdialog.cpp src/aboutdialog.h src/config.h \
+		src/gettext.h
 
 src/config.h:
 	sed -e "s/@PROJECT_NAME@/fortuner/" \

@@ -1,6 +1,6 @@
 /*
  * fortuner
- * Copyright (C) 2012 Juhani Numminen <juhaninumminen0@gmail.com>
+ * Copyright (C) 2013 Juhani Numminen <juhaninumminen0@gmail.com>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,12 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STATUS_ICON_H
-#define STATUS_ICON_H
+#ifndef ABOUTDIALOG_H
+#define ABOUTDIALOG_H
 
-#include <gtk/gtk.h>
+#include <gtkmm/aboutdialog.h>
 
-void display_status_icon ();
-void display_error_dialog (const char *message);
+class FortunerAboutDialog : public Gtk::AboutDialog
+{
+public:
+    FortunerAboutDialog ();
+    ~FortunerAboutDialog ();
+    void on_response (int);
+};
 
-#endif /* STATUS_ICON_H */
+#endif /* ABOUTDIALOG_H */
