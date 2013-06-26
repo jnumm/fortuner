@@ -34,9 +34,9 @@ public:
     std::string getTitle () const;
 
     // The setters.
-    void setCloseNotificationsOnQuit (const bool value);
-    void setOffensive (const bool value);
-    void setTimeout (const int value);
+    void setCloseNotificationsOnQuit (bool value);
+    void setOffensive (bool value);
+    void setTimeout (int value);
     void setTitle (const std::string& value);
 
 private:

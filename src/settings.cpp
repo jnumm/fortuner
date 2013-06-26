@@ -83,17 +83,17 @@ std::string Settings::getTitle () const
 }
 
 // The setters.
-void Settings::setCloseNotificationsOnQuit (const bool value)
+void Settings::setCloseNotificationsOnQuit (bool value)
 {
     m_closeNotificationsOnQuit = value;
 }
 
-void Settings::setOffensive (const bool value)
+void Settings::setOffensive (bool value)
 {
     m_offensive = value;
 }
 
-void Settings::setTimeout (const int value)
+void Settings::setTimeout (int value)
 {
     m_timeout = value;
 }
