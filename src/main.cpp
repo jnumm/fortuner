@@ -56,8 +56,8 @@ int main (int argc, char *argv[])
     
     bool no_icon_mode = false;
     bool offensive = false;
-    std::string settings_file = std::string (getenv ("HOME")) +
-            "/.config/fortuner/fortuner.conf";
+    std::string settings_file = Glib::get_user_config_dir () +
+            "/fortuner/fortuner.conf";
 
     // Parse arguments
     if (argc >= 1)
