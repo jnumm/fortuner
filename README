@@ -1,25 +1,25 @@
 ABOUT
 ------
 Fortuner shows a fortune as a notification. Requires the fortune
-program, libnotify and GTKMM 2 or 3.
+program, libnotify and gtkmm 3.
 
 INSTALLATION
 -------------
 1) Install the requirements
    An example for Debian GNU/Linux:
-   # apt-get install libgtkmm-2.4-dev fortune-mod libnotify-dev
-   To use GTKMM 3 change libgtkmm-2.4-dev to libgtkmm-3.0-dev.
+   # apt-get install libgtkmm-3.0-dev cmake fortune-mod libnotify-dev
 
-2) Clone the repository (get sources)
+2) Clone the repository (get sources) if you haven’t already
    $ git clone https://github.com/jnumm/fortuner.git
 
 3) Build the program
    $ cd fortuner
+   $ mkdir build && cd build
+   $ cmake ..
    $ make
-   GTKMM 3: $ make GTKMMVER=3.0
 
 3) Now you can run Fortuner:
-   $ ./fortuner
+   $ ../bin/fortuner
 
 BUGS
 -----

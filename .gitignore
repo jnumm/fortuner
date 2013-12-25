@@ -1,4 +1,1 @@
-fortuner
-src/*.o
-
-src/config.h
+build
