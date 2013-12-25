@@ -30,7 +30,7 @@ Settings::Settings (const std::string& filename)
     m_timeout = 10;
     m_title = _("Today's fortune");
 
-    std::ifstream fin (filename);
+    std::ifstream fin (filename.c_str());
     if (fin.is_open ())
     {
         std::string line;
