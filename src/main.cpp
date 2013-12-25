@@ -20,6 +20,7 @@
 #include <cstdlib>
 #include <cstring>
 
+#include <glibmm/miscutils.h>
 #include <gtkmm/main.h>
 #include <gtkmm/messagedialog.h>
 #include <libnotify/notify.h>
