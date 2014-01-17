@@ -11,4 +11,4 @@ DISTCLEANFILES = intltool-extract \
     intltool-update \
     po/.intltool-merge-cache
 
-SUBDIRS = doc misc po src
+SUBDIRS = doc icons misc po src

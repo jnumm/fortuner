@@ -26,6 +26,6 @@ PKG_PROG_PKG_CONFIG
 PKG_CHECK_MODULES([GTKMM], [gtkmm-3.0])
 PKG_CHECK_MODULES([LIBNOTIFY], [libnotify])
 
-AC_CONFIG_FILES([Makefile doc/Makefile misc/Makefile po/Makefile.in
-    src/Makefile])
+AC_CONFIG_FILES([Makefile doc/Makefile icons/Makefile misc/Makefile
+    po/Makefile.in src/Makefile])
 AC_OUTPUT
