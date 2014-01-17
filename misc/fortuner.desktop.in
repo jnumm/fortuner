@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Fortuner
-Comment=Shows fortunes
+_Name=Fortuner
+_Comment=Shows fortunes
 Exec=fortuner
 Icon=fortuner
 Type=Application
