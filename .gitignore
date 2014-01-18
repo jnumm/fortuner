@@ -1,6 +1,8 @@
 *.o
 fortuner
 
+*~
+
 .deps
 Makefile
 Makefile.in
