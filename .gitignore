@@ -29,6 +29,7 @@ intltool-extract.in
 intltool-merge.in
 intltool-update.in
 
+po/.intltool-merge-cache
 po/Makefile.in.in
 po/Makevars.template
 po/POTFILES
