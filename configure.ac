@@ -1,4 +1,4 @@
-AC_INIT([Fortuner], [0.4.0])
+AC_INIT([Fortuner], [0.5.0])
 
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_SRCDIR([src/main.cpp])
