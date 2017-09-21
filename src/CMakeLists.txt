@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 
 project(fortuner)
 
+set(CMAKE_CXX_STANDARD 14)
+
 set(fortuner_SRCS
   aboutdialog.cpp
   fortuner.cpp
