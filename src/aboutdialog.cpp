@@ -38,7 +38,7 @@ const Glib::ustring gpl3_license =
 FortunerAboutDialog::FortunerAboutDialog ()
 {
     set_program_name (_("Fortuner"));
-    set_version (PACKAGE_VERSION);
+    set_version (VERSION_STRING);
     set_copyright (_("Copyright (C) 2012, 2013 Juhani Numminen"));
     set_comments (_("Shows fortunes as notifications."));
     set_license (gpl3_license);

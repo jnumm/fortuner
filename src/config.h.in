@@ -1,0 +1,11 @@
+// The build system fills in these values.
+
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#define PROJECT_NAME "@PROJECT_NAME@"
+#define VERSION_STRING "@VERSION_STRING@"
+
+#define LOCALEDIR "@LOCALEDIR@"
+
+#endif /* CONFIG_H */

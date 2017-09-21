@@ -52,8 +52,8 @@ void print_help ()
 int main (int argc, char *argv[])
 {
     setlocale (LC_ALL, "");
-    bindtextdomain (PACKAGE, LOCALEDIR);
-    textdomain (PACKAGE);
+    bindtextdomain ("fortuner", LOCALEDIR);
+    textdomain ("fortuner");
     
     bool no_icon_mode = false;
     bool offensive = false;
@@ -74,7 +74,7 @@ int main (int argc, char *argv[])
             else if (strcmp (argv [i], "--version") == 0 ||
 					strcmp (argv [i], "-v") == 0)
             {
-                std::cout << PACKAGE_STRING " ";
+                std::cout << PROJECT_NAME " " VERSION_STRING " ";
                 printf (_("(compiled on %s)\n"), __DATE__);
                 return 0;
             }
@@ -109,7 +109,7 @@ int main (int argc, char *argv[])
     }
 
     // Initialize notification library
-    if (!notify_init (PACKAGE)) {
+    if (!notify_init (PROJECT_NAME)) {
         std::cerr << _("Could not initialize the notification library.\n");
         return 1;
     }
