@@ -23,13 +23,12 @@
 #include "gettext.h"
 #include "settings.h"
 
-Settings::Settings (const std::string& filename)
+Settings::Settings (const std::string& filename) :
+    m_closeNotificationsOnQuit(true),
+    m_offensive(false),
+    m_timeout(10),
+    m_title(_("Today's fortune"))
 {
-    m_closeNotificationsOnQuit = true;
-    m_offensive = false;
-    m_timeout = 10;
-    m_title = _("Today's fortune");
-
     std::ifstream fin (filename.c_str());
     if (fin.is_open ())
     {
@@ -55,10 +54,6 @@ Settings::Settings (const std::string& filename)
             }
         }
     }
-}
-
-Settings::~Settings()
-{
 }
 
 // The getters.

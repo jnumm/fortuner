@@ -25,7 +25,6 @@ class FortunerAboutDialog : public Gtk::AboutDialog
 {
 public:
     FortunerAboutDialog ();
-    ~FortunerAboutDialog ();
     void on_response (int);
 };
 

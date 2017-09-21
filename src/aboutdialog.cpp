@@ -51,10 +51,6 @@ FortunerAboutDialog::FortunerAboutDialog ()
             &FortunerAboutDialog::on_response));
 }
 
-FortunerAboutDialog::~FortunerAboutDialog ()
-{
-}
-
 void FortunerAboutDialog::on_response (int)
 {
     hide ();

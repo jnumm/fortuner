@@ -25,7 +25,6 @@ class Settings
 {
 public:
     Settings (const std::string& filename);
-    ~Settings ();
 
     // The getters.
     bool getCloseNotificationsOnQuit () const;

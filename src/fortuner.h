@@ -29,7 +29,6 @@ class Fortuner
 {
 public:
     Fortuner (const Settings& settings);
-    ~Fortuner ();
 
     void send_fortune ();
     void close_notifications ();

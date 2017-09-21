@@ -30,7 +30,6 @@ class FortunerStatusIcon
 {
 public:
     FortunerStatusIcon (Fortuner& fortuner);
-    ~FortunerStatusIcon ();
 
 private:
     void on_popup_menu (guint button, guint32 activate_time);

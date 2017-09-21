@@ -78,10 +78,6 @@ FortunerStatusIcon::FortunerStatusIcon (Fortuner& fortuner)
     m_refStatusIcon->set_visible ();
 }
 
-FortunerStatusIcon::~FortunerStatusIcon ()
-{
-}
-
 void FortunerStatusIcon::on_popup_menu (guint button, guint32 activate_time)
 {
     if (m_pMenuPopup) {

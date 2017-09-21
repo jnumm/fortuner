@@ -26,10 +26,6 @@ Fortuner::Fortuner (const Settings& settings)
 {
 }
 
-Fortuner::~Fortuner ()
-{
-}
-
 // Get and send a fortune.
 void Fortuner::send_fortune ()
 {
