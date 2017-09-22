@@ -1,24 +1,24 @@
 cmake_minimum_required(VERSION 3.1)
 
 project(fortuner)
+set(FORTUNER_VERSION "0.6")
 
-set(VER_MAJOR 0)
-set(VER_MINOR 4)
-set(VER_MICRO 0)
-set(VERSION_STRING "${VER_MAJOR}.${VER_MINOR}.${VER_MICRO}")
+set(CMAKE_CXX_STANDARD 14)
+add_compile_options(-Wall -Wextra -pedantic)
 
-install(FILES README DESTINATION share/doc/${PROJECT_NAME})
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+configure_file(config.h.in config.h)
+
+set (fortuner_SRCS main.cpp trayicon.cpp trayicon.h)
+
+find_package(Qt5Widgets REQUIRED)
+add_executable(fortuner ${fortuner_SRCS})
+target_link_libraries(fortuner Qt5::Widgets)
+install(TARGETS fortuner DESTINATION bin)
+
 file(GLOB icons "icons/*")
 install(DIRECTORY ${icons} DESTINATION share/icons/hicolor)
-install(FILES misc/fortuner.desktop DESTINATION share/applications)
-install(FILES doc/fortuner.6 DESTINATION share/man/man6)
-
-set(LOCALEDIR "${CMAKE_INSTALL_PREFIX}/share/locale")
-
-option(
-  USE_GETTEXT
-  "Use GNU Gettext for i18n. Disable for no translation."
-  ON
-)
-
-add_subdirectory(src)
+install(FILES fortuner.desktop DESTINATION share/applications)
+install(FILES fortuner.6 DESTINATION share/man/man6)

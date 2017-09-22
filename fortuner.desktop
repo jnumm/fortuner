@@ -4,6 +4,6 @@ Comment=Shows fortunes
 Exec=fortuner
 Icon=fortuner
 Type=Application
-Categories=Game;Amusement;GTK;
+Categories=Game;Amusement;Qt;
 Terminal=false
 StartupNotify=false

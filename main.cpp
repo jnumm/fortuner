@@ -1,6 +1,6 @@
 /*
  * fortuner
- * Copyright (C) 2013 Juhani Numminen <juhaninumminen0@gmail.com>
+ * Copyright (C) 2017 Juhani Numminen <juhaninumminen0@gmail.com>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,30 +16,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef FORTUNER_H
-#define FORTUNER_H
+#include <QApplication>
 
-#include <vector>
+#include "config.h"
+#include "trayicon.h"
 
-#include <libnotify/notify.h>
+int main(int argc, char **argv) {
+    QApplication app(argc, argv);
+    QCoreApplication::setOrganizationName("jnumm");
+    QCoreApplication::setApplicationName(
+            QCoreApplication::translate("Fortuner::TrayIcon", "Fortuner"));
+    QCoreApplication::setApplicationVersion(FORTUNER_VERSION);
+    QApplication::setWindowIcon(QIcon::fromTheme("debian-swirl"));
 
-#include "settings.h"
-
-class Fortuner
-{
-public:
-    Fortuner (const Settings& settings);
-
-    void send_fortune ();
-    void close_notifications ();
-
-private:
-    std::string get_fortune () const;
-    void send_notify (const std::string& message);
-
-    const Settings& m_settings;
-
-    std::vector<NotifyNotification> m_notifications;
-};
-
-#endif // FORTUNER_H
+    Fortuner::TrayIcon trayIcon;
+    return app.exec();
+}
