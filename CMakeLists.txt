@@ -19,7 +19,7 @@ configure_file(config.h.in config.h)
 
 set(fortuner_SRCS main.cpp trayicon.cpp trayicon.h)
 
-find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Widgets 5.6 REQUIRED)
 add_executable(fortuner ${fortuner_SRCS})
 target_link_libraries(fortuner Qt5::Widgets)
 install(TARGETS fortuner DESTINATION bin)
