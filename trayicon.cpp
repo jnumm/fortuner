@@ -52,7 +52,17 @@ void Fortuner::TrayIcon::showFortune() {
     QProcess fortune;
     fortune.start("fortune", fortuneArguments, QIODevice::ReadOnly);
     if (fortune.waitForFinished())
-        showMessage(tr("Fortuner"), fortune.readAll());
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 9, 0))
+#   define FORTUNER_QICON_OR_ENUM icon()
+#else
+#   define FORTUNER_QICON_OR_ENUM QSystemTrayIcon::NoIcon
+#endif
+        showMessage(tr("Fortuner"),
+                fortune.readAll().replace('<', "&lt;") + "\n---",
+                FORTUNER_QICON_OR_ENUM);
+#undef FORTUNER_QICON_OR_ENUM
+
     else
         QMessageBox::critical(nullptr, tr("Fortuner: fortune failed"),
                 tr("<p>Could not execute <tt>fortune</tt>.<br> Try to install "
