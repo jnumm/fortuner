@@ -9,7 +9,7 @@ else()
 endif()
 
 set(CMAKE_CXX_EXTENSIONS OFF)
-add_compile_options(-Wall -Wextra -pedantic)
+add_compile_options(-DQT_DEPRECATED_WARNINGS -Wall -Wextra -pedantic)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
