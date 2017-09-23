@@ -32,14 +32,14 @@ int main(int argc, char* argv[]) {
 
     QTranslator translator;
     translator.load(QLocale(), "fortuner", "_", TRANSLATION_DIR);
-    QCoreApplication::installTranslator(&translator);
+    app.installTranslator(&translator);
 
-    QCoreApplication::setOrganizationName("jnumm");
-    QCoreApplication::setApplicationName(Fortuner::TrayIcon::tr("Fortuner"));
-    QCoreApplication::setApplicationVersion(FORTUNER_VERSION);
-    QApplication::setWindowIcon(QIcon::fromTheme("fortuner"));
+    app.setOrganizationName("jnumm");
+    app.setApplicationName(Fortuner::TrayIcon::tr("Fortuner"));
+    app.setApplicationVersion(FORTUNER_VERSION);
+    app.setWindowIcon(QIcon::fromTheme("fortuner"));
 
-    auto fortuneArgs = QCoreApplication::arguments();
+    auto fortuneArgs = app.arguments();
     // We don't want the argument list to fortune to contain our program name
     fortuneArgs.removeFirst();
     Fortuner::TrayIcon trayIcon(std::move(fortuneArgs));
