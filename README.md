@@ -8,7 +8,7 @@ INSTALLATION
 1. Install the requirements
    An example for Debian GNU/Linux:
 
-        # apt-get install fortune-mod cmake qtbase5-dev
+        # apt-get install fortune-mod cmake qtbase5-dev qttools5-dev-tools
 
 2. Clone the repository (get sources) if you haven’t already
 

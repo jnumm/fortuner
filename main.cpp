@@ -20,13 +20,20 @@
 
 #include <QApplication>
 #include <QIcon>
+#include <QLocale>
 #include <QStringList>
+#include <QTranslator>
 
 #include "config.h"
 #include "trayicon.h"
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
+
+    QTranslator translator;
+    translator.load(QLocale(), "fortuner", "_", TRANSLATION_DIR);
+    QCoreApplication::installTranslator(&translator);
+
     QCoreApplication::setOrganizationName("jnumm");
     QCoreApplication::setApplicationName(Fortuner::TrayIcon::tr("Fortuner"));
     QCoreApplication::setApplicationVersion(FORTUNER_VERSION);
