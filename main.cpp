@@ -16,19 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <utility> // for std::move
+
 #include <QApplication>
+#include <QIcon>
+#include <QStringList>
 
 #include "config.h"
 #include "trayicon.h"
 
-int main(int argc, char **argv) {
+int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
     QCoreApplication::setOrganizationName("jnumm");
-    QCoreApplication::setApplicationName(
-            QCoreApplication::translate("Fortuner::TrayIcon", "Fortuner"));
+    QCoreApplication::setApplicationName(Fortuner::TrayIcon::tr("Fortuner"));
     QCoreApplication::setApplicationVersion(FORTUNER_VERSION);
-    QApplication::setWindowIcon(QIcon::fromTheme("debian-swirl"));
+    QApplication::setWindowIcon(QIcon::fromTheme("fortuner"));
 
-    Fortuner::TrayIcon trayIcon;
+    auto fortuneArgs = QCoreApplication::arguments();
+    // We don't want the argument list to fortune to contain our program name
+    fortuneArgs.removeFirst();
+    Fortuner::TrayIcon trayIcon(std::move(fortuneArgs));
+
     return app.exec();
 }

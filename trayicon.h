@@ -20,6 +20,7 @@
  */
 
 #include <QMenu>
+#include <QStringList>
 #include <QSystemTrayIcon>
 
 namespace Fortuner {
@@ -28,11 +29,12 @@ class TrayIcon : public QSystemTrayIcon {
     Q_OBJECT
 
 public:
-    TrayIcon(QWidget *parent = nullptr);
+    TrayIcon(QStringList&& fortuneArgs, QWidget* parent = nullptr);
 
 private:
     void showFortune();
 
+    const QStringList fortuneArguments;
     QMenu contextMenu;
 };
 

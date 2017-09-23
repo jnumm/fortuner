@@ -20,11 +20,13 @@
 
 #include <QApplication>
 #include <QIcon>
+#include <QIODevice>
 #include <QMessageBox>
 #include <QProcess>
 
-Fortuner::TrayIcon::TrayIcon(QWidget *parent)
+Fortuner::TrayIcon::TrayIcon(QStringList&& fortuneArgs, QWidget* parent)
     : QSystemTrayIcon(qApp->windowIcon(), parent)
+    , fortuneArguments(fortuneArgs)
     , contextMenu()
 {
     setToolTip(tr("Fortuner"));
@@ -32,10 +34,10 @@ Fortuner::TrayIcon::TrayIcon(QWidget *parent)
     connect(this, &QSystemTrayIcon::activated,
             this, &Fortuner::TrayIcon::showFortune);
 
-    contextMenu.addAction(QIcon::fromTheme("help-about"), tr("About Fortuner"), []() {
+    contextMenu.addAction(QIcon::fromTheme("help-about"), tr("About Fortuner…"), []() {
         QMessageBox::about(nullptr, tr("About Fortuner"),
                 tr("<p>Fortuner shows fortunes as notifications.</p> "
-                   "<p>Copyright &copy; Juhani Numminen 2017. "
+                   "<p>Copyright © Juhani Numminen 2017.<br> "
                    "Distributed under the terms of GPLv3+.</p> "
                    "<p><a href='https://github.com/jnumm/fortuner'>Homepage</a></p>"));
     });
@@ -48,7 +50,7 @@ Fortuner::TrayIcon::TrayIcon(QWidget *parent)
 
 void Fortuner::TrayIcon::showFortune() {
     QProcess fortune;
-    fortune.start("fortune");
+    fortune.start("fortune", fortuneArguments, QIODevice::ReadOnly);
     if (fortune.waitForFinished())
         showMessage(tr("Fortuner"), fortune.readAll());
     else
