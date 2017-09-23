@@ -48,7 +48,10 @@ Fortuner::TrayIcon::TrayIcon(QStringList&& fortuneArgs, QWidget* parent)
     show();
 }
 
-void Fortuner::TrayIcon::showFortune() {
+void Fortuner::TrayIcon::showFortune(QSystemTrayIcon::ActivationReason reason) {
+    if (reason == QSystemTrayIcon::ActivationReason::Context)
+        return;
+
     QProcess fortune;
     fortune.start("fortune", fortuneArguments, QIODevice::ReadOnly);
     if (fortune.waitForFinished())

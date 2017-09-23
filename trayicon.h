@@ -32,7 +32,7 @@ public:
     TrayIcon(QStringList&& fortuneArgs, QWidget* parent = nullptr);
 
 private:
-    void showFortune();
+    void showFortune(QSystemTrayIcon::ActivationReason reason);
 
     const QStringList fortuneArguments;
     QMenu contextMenu;
