@@ -1,14 +1,14 @@
 ABOUT
 ------
 Fortuner shows a fortune as a notification. Requires the fortune
-program, libnotify and gtkmm 3.
+program, CMake, and Qt5.
 
 INSTALLATION
 -------------
 1. Install the requirements
    An example for Debian GNU/Linux:
 
-        # apt-get install libgtkmm-3.0-dev fortune-mod libnotify-dev
+        # apt-get install fortune-mod cmake qtbase5-dev
 
 2. Clone the repository (get sources) if you haven’t already
 
@@ -17,15 +17,15 @@ INSTALLATION
 3. Build the program
 
         $ cd fortuner
-        $ ./autogen.sh
-        $ ./configure
+        $ mkdir build && cd build
+        $ cmake ..
         $ make
 
 3. Now you can run Fortuner:
 
-        $ src/fortuner
+        $ ./fortuner
 
-4. To install the package:
+4. To install the package into /usr/local:
 
         # make install
 
