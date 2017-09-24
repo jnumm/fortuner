@@ -62,7 +62,7 @@ void Fortuner::TrayIcon::showFortune(QSystemTrayIcon::ActivationReason reason) {
 #   define FORTUNER_QICON_OR_ENUM QSystemTrayIcon::NoIcon
 #endif
         showMessage(tr("Fortuner"),
-                fortune.readAll().replace('<', "&lt;") + "\n---",
+                fortune.readAll().replace('<', "&lt;") + "–––",
                 FORTUNER_QICON_OR_ENUM);
 #undef FORTUNER_QICON_OR_ENUM
 
