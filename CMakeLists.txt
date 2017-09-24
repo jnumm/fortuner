@@ -2,17 +2,16 @@ cmake_minimum_required(VERSION 3.1)
 
 project(fortuner VERSION 0.6 LANGUAGES CXX)
 
-if (${CMAKE_VERSION} VERSION_LESS 3.8)
-    set(CMAKE_CXX_STANDARD 14)
-else()
-    set(CMAKE_CXX_STANDARD 17)
-endif()
-
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_EXTENSIONS OFF)
-add_compile_options(-DQT_DEPRECATED_WARNINGS -Wall -Wextra -pedantic)
-
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_WIN32_EXECUTABLE ON)
+
+add_definitions(-DQT_DEPRECATED_WARNINGS)
+if(NOT CMAKE_CXX_COMPILER_ID MATCHES MSVC)
+    add_compile_options(-Wall -Wextra -pedantic)
+endif()
 
 set(TRANSLATION_DIR ${CMAKE_INSTALL_PREFIX}/share/fortuner/translations)
 
