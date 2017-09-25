@@ -24,6 +24,8 @@
 #include <QMessageBox>
 #include <QProcess>
 
+#include "config.h"
+
 Fortuner::TrayIcon::TrayIcon(QStringList&& fortuneArgs, QWidget* parent)
     : QSystemTrayIcon(qApp->windowIcon(), parent)
     , fortuneArguments(fortuneArgs)
@@ -36,10 +38,14 @@ Fortuner::TrayIcon::TrayIcon(QStringList&& fortuneArgs, QWidget* parent)
 
     contextMenu.addAction(QIcon::fromTheme("help-about"), tr("About Fortuner…"), []() {
         QMessageBox::about(nullptr, tr("About Fortuner"),
-                tr("<p>Fortuner shows fortunes as notifications.</p> "
-                   "<p>Copyright © Juhani Numminen 2017.<br> "
-                   "Distributed under the terms of GPLv3+.</p> "
-                   "<p><a href='https://github.com/jnumm/fortuner'>Homepage</a></p>"));
+                tr("<div style='text-align:center'>"
+                   "<p><span style='font-size:35pt'>Fortuner</span><br>"
+                   "Version %1</p>"
+                   "<p>Fortuner shows fortunes as notifications.</p>"
+                   "<p><a href='https://github.com/jnumm/fortuner'>Homepage</a></p>"
+                   "<p style='font-size:small'>Copyright © Juhani Numminen 2017.<br>"
+                   "Distributed under the terms of GPLv3+.</p>"
+                   "</div>").arg(FORTUNER_VERSION));
     });
     contextMenu.addAction(QIcon::fromTheme("application-exit"), tr("Quit"), qApp, &QApplication::quit);
 
@@ -56,13 +62,13 @@ void Fortuner::TrayIcon::showFortune(QSystemTrayIcon::ActivationReason reason) {
     fortune.start("fortune", fortuneArguments, QIODevice::ReadOnly);
     if (fortune.waitForFinished())
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 9, 0))
+#if (QT_VERSION >= QT_VERSION_CHECK(5,9,0))
 #   define FORTUNER_QICON_OR_ENUM icon()
 #else
 #   define FORTUNER_QICON_OR_ENUM QSystemTrayIcon::NoIcon
 #endif
         showMessage(tr("Fortuner"),
-                fortune.readAll().replace('<', "&lt;") + "–––",
+                fortune.readAll().replace('<', "&lt;").append("–––"),
                 FORTUNER_QICON_OR_ENUM);
 #undef FORTUNER_QICON_OR_ENUM
 
