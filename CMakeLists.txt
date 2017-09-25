@@ -14,6 +14,8 @@ if(NOT CMAKE_CXX_COMPILER_ID MATCHES MSVC)
 endif()
 
 set(TRANSLATION_DIR ${CMAKE_INSTALL_PREFIX}/share/fortuner/translations)
+set(FORTUNER_ICON_FILE
+        ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps/fortuner.svg)
 
 configure_file(config.h.in config.h)
 
