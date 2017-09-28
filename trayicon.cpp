@@ -32,9 +32,15 @@ Fortuner::TrayIcon::TrayIcon(QStringList&& fortuneArgs, QWidget* parent)
 {
     setToolTip(tr("Fortuner"));
 
+#ifndef Q_OS_MACOS
+    // On macOS, left and right clicking a system tray icon have the same effect
     connect(this, &QSystemTrayIcon::activated,
             this, &Fortuner::TrayIcon::showFortune);
+#endif
 
+    contextMenu.addAction(icon(), tr("Show a fortune"), [this]() {
+        showFortune(QSystemTrayIcon::ActivationReason::Unknown);
+    });
     contextMenu.addAction(QIcon::fromTheme("help-about"), tr("About Fortuner…"), []() {
         QMessageBox::about(nullptr, tr("About Fortuner"),
                 tr("<div style='text-align:center'>"
