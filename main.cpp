@@ -37,8 +37,13 @@ int main(int argc, char* argv[]) {
     app.setOrganizationName("jnumm");
     app.setApplicationName(Fortuner::TrayIcon::tr("Fortuner"));
     app.setApplicationVersion(FORTUNER_VERSION);
-    app.setWindowIcon(QIcon::fromTheme("fortuner", QIcon(FORTUNER_ICON_FILE)));
     app.setQuitOnLastWindowClosed(false);
+
+#ifdef FORTUNER_QRESOURCE_ICON
+    app.setWindowIcon(QIcon{":/icon.png"});
+#else
+    app.setWindowIcon(QIcon::fromTheme("fortuner"));
+#endif
 
     auto fortuneArgs = app.arguments();
     // We don't want the argument list to fortune to contain our program name

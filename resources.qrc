@@ -1,0 +1,5 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file alias="icon.png">icons/hicolor/96x96/apps/fortuner.png</file>
+</qresource>
+</RCC>
