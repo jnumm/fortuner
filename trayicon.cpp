@@ -18,6 +18,8 @@
 
 #include "trayicon.h"
 
+#include <utility> // for std::move
+
 #include <QApplication>
 #include <QIcon>
 #include <QIODevice>
@@ -26,9 +28,9 @@
 
 #include "config.h"
 
-Fortuner::TrayIcon::TrayIcon(QStringList&& fortuneArgs, QWidget* parent)
+Fortuner::TrayIcon::TrayIcon(QStringList fortuneArguments, QWidget* parent)
     : QSystemTrayIcon{qApp->windowIcon(), parent}
-    , fortuneArguments{fortuneArgs}
+    , fortuneArgs{std::move(fortuneArguments)}
 {
     setToolTip(tr("Fortuner"));
 
@@ -53,10 +55,7 @@ Fortuner::TrayIcon::TrayIcon(QStringList&& fortuneArgs, QWidget* parent)
                    "</div>").arg(FORTUNER_VERSION));
     });
     contextMenu.addAction(QIcon::fromTheme("application-exit"), tr("Quit"), qApp, &QApplication::quit);
-
     setContextMenu(&contextMenu);
-
-    show();
 }
 
 void Fortuner::TrayIcon::showFortune(QSystemTrayIcon::ActivationReason reason) {
@@ -64,22 +63,15 @@ void Fortuner::TrayIcon::showFortune(QSystemTrayIcon::ActivationReason reason) {
         return;
 
     QProcess fortune;
-    fortune.start("fortune", fortuneArguments, QIODevice::ReadOnly);
-    if (fortune.waitForFinished())
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5,9,0))
-#   define FORTUNER_QICON_OR_ENUM icon()
-#else
-#   define FORTUNER_QICON_OR_ENUM QSystemTrayIcon::NoIcon
-#endif
+    fortune.start("fortune", fortuneArgs, QIODevice::ReadOnly);
+    if (fortune.waitForFinished()) {
         showMessage(tr("Fortuner"),
                 fortune.readAll().replace('<', "&lt;").append("–––"),
-                FORTUNER_QICON_OR_ENUM);
-#undef FORTUNER_QICON_OR_ENUM
-
-    else
+                QSystemTrayIcon::MessageIcon::NoIcon);
+    } else {
         QMessageBox::critical(nullptr, tr("Fortuner: fortune failed"),
                 tr("<p>Could not execute <tt>fortune</tt>.<br> Try to install "
                    "package <tt>fortune</tt> or <tt>fortune-mod</tt>.</p> "
                    "<p>Error output:</p>") + fortune.errorString());
+    }
 }

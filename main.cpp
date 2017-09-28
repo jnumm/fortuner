@@ -16,12 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <utility> // for std::move
-
 #include <QApplication>
 #include <QIcon>
 #include <QLocale>
-#include <QStringList>
 #include <QTranslator>
 
 #include "config.h"
@@ -46,10 +43,11 @@ int main(int argc, char* argv[]) {
     app.setWindowIcon(QIcon::fromTheme("fortuner"));
 #endif
 
-    auto fortuneArgs = app.arguments();
+    auto tail = [](auto list) { list.pop_front(); return list; };
+
     // We don't want the argument list to fortune to contain our program name
-    fortuneArgs.removeFirst();
-    Fortuner::TrayIcon trayIcon{std::move(fortuneArgs)};
+    Fortuner::TrayIcon trayIcon{tail(app.arguments())};
+    trayIcon.show();
 
     return app.exec();
 }

@@ -29,12 +29,12 @@ class TrayIcon : public QSystemTrayIcon {
     Q_OBJECT
 
 public:
-    TrayIcon(QStringList&& fortuneArgs, QWidget* parent = nullptr);
+    TrayIcon(QStringList fortuneArguments, QWidget* parent = nullptr);
 
 private:
     void showFortune(QSystemTrayIcon::ActivationReason reason);
 
-    const QStringList fortuneArguments;
+    const QStringList fortuneArgs;
     QMenu contextMenu;
 };
 
