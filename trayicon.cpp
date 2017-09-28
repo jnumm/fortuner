@@ -29,7 +29,6 @@
 Fortuner::TrayIcon::TrayIcon(QStringList&& fortuneArgs, QWidget* parent)
     : QSystemTrayIcon(qApp->windowIcon(), parent)
     , fortuneArguments(fortuneArgs)
-    , contextMenu()
 {
     setToolTip(tr("Fortuner"));
 
