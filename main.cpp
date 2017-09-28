@@ -35,7 +35,8 @@ int main(int argc, char* argv[]) {
     app.installTranslator(&translator);
 
     app.setOrganizationName("jnumm");
-    app.setApplicationName(Fortuner::TrayIcon::tr("Fortuner"));
+    app.setApplicationName("fortuner");
+    app.setApplicationDisplayName(Fortuner::TrayIcon::tr("Fortuner"));
     app.setApplicationVersion(FORTUNER_VERSION);
     app.setQuitOnLastWindowClosed(false);
 
