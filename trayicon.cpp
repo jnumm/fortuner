@@ -27,8 +27,8 @@
 #include "config.h"
 
 Fortuner::TrayIcon::TrayIcon(QStringList&& fortuneArgs, QWidget* parent)
-    : QSystemTrayIcon(qApp->windowIcon(), parent)
-    , fortuneArguments(fortuneArgs)
+    : QSystemTrayIcon{qApp->windowIcon(), parent}
+    , fortuneArguments{fortuneArgs}
 {
     setToolTip(tr("Fortuner"));
 

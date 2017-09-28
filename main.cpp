@@ -28,10 +28,10 @@
 #include "trayicon.h"
 
 int main(int argc, char* argv[]) {
-    QApplication app(argc, argv);
+    QApplication app{argc, argv};
 
     QTranslator translator;
-    translator.load(QLocale(), "fortuner", "_", TRANSLATION_DIR);
+    translator.load(QLocale{}, "fortuner", "_", TRANSLATION_DIR);
     app.installTranslator(&translator);
 
     app.setOrganizationName("jnumm");
@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
     auto fortuneArgs = app.arguments();
     // We don't want the argument list to fortune to contain our program name
     fortuneArgs.removeFirst();
-    Fortuner::TrayIcon trayIcon(std::move(fortuneArgs));
+    Fortuner::TrayIcon trayIcon{std::move(fortuneArgs)};
 
     return app.exec();
 }
