@@ -4,17 +4,20 @@ project(fortuner VERSION 0.6 LANGUAGES CXX)
 find_package(Qt5Widgets 5.6 REQUIRED)
 find_package(Qt5LinguistTools)
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_WIN32_EXECUTABLE ON)
-set(CMAKE_MACOSX_BUNDLE ON)
+add_executable(fortuner main.cpp trayicon.cpp trayicon.h)
+set_target_properties(fortuner PROPERTIES
+    CXX_STANDARD 14
+    CXX_EXTENSIONS OFF
+    AUTOMOC ON
+    AUTORCC ON
+    WIN32_EXECUTABLE ON
+    MACOSX_BUNDLE ON
+    INCLUDE_DIRECTORIES ${CMAKE_CURRENT_BINARY_DIR}
+    COMPILE_DEFINITIONS QT_DEPRECATED_WARNINGS
+    LINK_LIBRARIES Qt5::Widgets)
 
-add_definitions(-DQT_DEPRECATED_WARNINGS)
 if(NOT MSVC)
-    add_compile_options(-Wall -Wextra -pedantic)
+    target_compile_options(fortuner PRIVATE -Wall -Wextra -pedantic)
 endif()
 
 set(FORTUNER_QRESOURCE_ICON ${APPLE}${WIN32} CACHE BOOL
@@ -22,17 +25,16 @@ set(FORTUNER_QRESOURCE_ICON ${APPLE}${WIN32} CACHE BOOL
 assumed to be available through a system icon theme.")
 
 if(FORTUNER_QRESOURCE_ICON)
-    set(QRC_FILES resources.qrc)
+    target_sources(fortuner PRIVATE resources.qrc)
 endif()
 
-set(TS_FILES)
 set(TRANSLATION_DIR ${CMAKE_INSTALL_PREFIX}/share/fortuner/translations)
-qt5_add_translation(QM_FILES ${TS_FILES})
+qt5_add_translation(QM_FILES
+    # Add fortuner_<lang>.ts files here.
+)
+target_sources(fortuner PRIVATE ${QM_FILES})
 
 configure_file(config.h.in config.h)
-
-add_executable(fortuner main.cpp trayicon.cpp trayicon.h ${QRC_FILES} ${QM_FILES})
-target_link_libraries(fortuner Qt5::Widgets)
 
 install(TARGETS fortuner DESTINATION bin)
 install(FILES ${QM_FILES} DESTINATION ${TRANSLATION_DIR})
