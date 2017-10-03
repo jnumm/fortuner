@@ -43,6 +43,7 @@ Fortuner::TrayIcon::TrayIcon(QStringList fortuneArguments, QWidget* parent)
     contextMenu.addAction(icon(), tr("Show a fortune"), [this]() {
         showFortune(QSystemTrayIcon::ActivationReason::Unknown);
     });
+    contextMenu.addSeparator();
     contextMenu.addAction(QIcon::fromTheme("help-about"), tr("About Fortuner…"), []() {
         QMessageBox::about(nullptr, tr("About Fortuner"),
                 tr("<div style='text-align:center'>"
